@@ -116,12 +116,12 @@ export default function Home() {
             Join the movement where builders become owners. Start your community's transformation today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg">
+            <a href="/create-club" className="btn bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg">
               Create Your Club
-            </button>
-            <button className="btn border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
-              Join Community
-            </button>
+            </a>
+            <a href="/club/demo" className="btn border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+              View Demo Club
+            </a>
           </div>
         </div>
       </section>
