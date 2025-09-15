@@ -62,8 +62,8 @@ Transform online communities into builder DAOs where members become co-owners, n
 ### For Developers
 ```bash
 # Clone the repository
-git clone https://github.com/buildaclub/platform
-cd platform
+git clone https://github.com/rsnash92/builda-club
+cd builda-club
 
 # Install dependencies
 npm install
@@ -90,9 +90,9 @@ git push main
 
 ### Phase 1: BUIDL Foundation (Weeks 1-2)
 - [x] Project structure and documentation
-- [ ] Vercel + Privy + Supabase setup
-- [ ] Database schema + auth flow
-- [ ] Basic UI with Next.js + Tailwind
+- [x] Vercel + Privy + Supabase setup
+- [x] Database schema + auth flow
+- [x] Basic UI with Next.js + Tailwind
 
 ### Phase 2: MVP BUIDL (Weeks 3-6)
 - [ ] Treasury + payments integration
@@ -148,5 +148,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Welcome to builda.club**
 
 *Where Builders Become Owners*
-
-
