@@ -16,12 +16,9 @@ export function ChatTab({ clubId }: ChatTabProps) {
               <h3 className="text-lg font-semibold text-gray-900">Club Chat</h3>
               <p className="text-sm text-gray-600">Real-time communication with your club members</p>
             </div>
-            <a 
-              href={`/club/${clubId}/chat`}
-              className="btn btn-primary"
-            >
-              Open Chat
-            </a>
+            <div className="text-sm text-gray-500">
+              Chat is now integrated into the main interface
+            </div>
           </div>
         </div>
         
@@ -30,8 +27,8 @@ export function ChatTab({ clubId }: ChatTabProps) {
             <MessageSquare className="h-16 w-16 text-gray-400 mx-auto mb-4" />
             <h4 className="text-lg font-medium text-gray-900 mb-2">Discord-like Chat Interface</h4>
             <p className="text-gray-600 mb-6 max-w-md">
-              Click "Open Chat" to access the full Discord-like experience with channels, 
-              real-time messaging, member status, and voice/video capabilities.
+              The chat interface is now integrated into the main club dashboard. 
+              Use the left sidebar to navigate between channels and the main area for messaging.
             </p>
             <div className="grid grid-cols-2 gap-4 max-w-md mx-auto text-sm">
               <div className="flex items-center text-gray-600">
