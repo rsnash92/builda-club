@@ -11,8 +11,10 @@ import {
   Plus,
   TrendingUp,
   Clock,
-  Shield
+  Shield,
+  MessageSquare
 } from 'lucide-react'
+import { ChatTab } from './components/ChatTab'
 
 export default function ClubDashboard() {
   const params = useParams()
@@ -37,6 +39,7 @@ export default function ClubDashboard() {
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: TrendingUp },
+    { id: 'chat', label: 'Chat', icon: MessageSquare },
     { id: 'treasury', label: 'Treasury', icon: DollarSign },
     { id: 'members', label: 'Members', icon: Users },
     { id: 'governance', label: 'Governance', icon: Vote },
@@ -99,6 +102,7 @@ export default function ClubDashboard() {
         {/* Main Content */}
         <main className="flex-1 p-6">
           {activeTab === 'overview' && <OverviewTab clubData={clubData} />}
+          {activeTab === 'chat' && <ChatTab clubId={clubId} />}
           {activeTab === 'treasury' && <TreasuryTab clubData={clubData} />}
           {activeTab === 'members' && <MembersTab clubData={clubData} />}
           {activeTab === 'governance' && <GovernanceTab clubData={clubData} />}
