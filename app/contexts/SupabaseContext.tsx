@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { User } from '@supabase/supabase-js'
-import { supabase } from '@/lib/supabase'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase'
 import { UserProfile } from '@/lib/database/types'
 
 interface SupabaseContextType {
@@ -21,9 +21,15 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!isSupabaseConfigured()) {
+      console.warn('Supabase not configured, skipping auth setup')
+      setLoading(false)
+      return
+    }
+
     // Get initial session
     const getInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
+      const { data: { session } } = await supabase!.auth.getSession()
       setUser(session?.user ?? null)
       if (session?.user) {
         await fetchProfile(session.user.id)
@@ -34,7 +40,7 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
     getInitialSession()
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    const { data: { subscription } } = supabase!.auth.onAuthStateChange(
       async (event, session) => {
         setUser(session?.user ?? null)
         if (session?.user) {
@@ -50,8 +56,12 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const fetchProfile = async (userId: string) => {
+    if (!isSupabaseConfigured()) {
+      return
+    }
+
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from('user_profiles')
         .select('*')
         .eq('id', userId)
@@ -75,7 +85,9 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signOut = async () => {
-    await supabase.auth.signOut()
+    if (isSupabaseConfigured()) {
+      await supabase!.auth.signOut()
+    }
   }
 
   const value = {

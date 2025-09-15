@@ -1,9 +1,15 @@
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient, isSupabaseConfigured } from '@/lib/supabase'
 import { Club, Member, ClubWithMembers } from '@/lib/database/types'
 
 export class ClubService {
   // Get all clubs
   static async getClubs(): Promise<Club[]> {
+    if (!isSupabaseConfigured()) {
+      console.warn('Supabase not configured, returning empty clubs array')
+      return []
+    }
+
+    const supabase = getSupabaseClient()
     const { data, error } = await supabase
       .from('clubs')
       .select('*')
@@ -19,6 +25,12 @@ export class ClubService {
 
   // Get club by ID with members
   static async getClubById(id: string): Promise<ClubWithMembers | null> {
+    if (!isSupabaseConfigured()) {
+      console.warn('Supabase not configured, returning null')
+      return null
+    }
+
+    const supabase = getSupabaseClient()
     const { data, error } = await supabase
       .from('clubs')
       .select(`
@@ -48,6 +60,11 @@ export class ClubService {
     description?: string
     created_by: string
   }): Promise<Club> {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Supabase not configured')
+    }
+
+    const supabase = getSupabaseClient()
     const { data, error } = await supabase
       .from('clubs')
       .insert([clubData])
@@ -64,6 +81,11 @@ export class ClubService {
 
   // Join a club
   static async joinClub(clubId: string, userId: string, contributionAmount: number = 0): Promise<Member> {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Supabase not configured')
+    }
+
+    const supabase = getSupabaseClient()
     const { data, error } = await supabase
       .from('members')
       .insert([{
@@ -85,6 +107,12 @@ export class ClubService {
 
   // Get user's clubs
   static async getUserClubs(userId: string): Promise<ClubWithMembers[]> {
+    if (!isSupabaseConfigured()) {
+      console.warn('Supabase not configured, returning empty clubs array')
+      return []
+    }
+
+    const supabase = getSupabaseClient()
     const { data, error } = await supabase
       .from('clubs')
       .select(`
@@ -110,6 +138,11 @@ export class ClubService {
 
   // Update club treasury balance
   static async updateTreasuryBalance(clubId: string, newBalance: number): Promise<void> {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Supabase not configured')
+    }
+
+    const supabase = getSupabaseClient()
     const { error } = await supabase
       .from('clubs')
       .update({ treasury_balance: newBalance })
@@ -121,4 +154,3 @@ export class ClubService {
     }
   }
 }
-
