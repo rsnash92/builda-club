@@ -1,8 +1,14 @@
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient, isSupabaseConfigured } from '@/lib/supabase'
 import { UserProfile } from '@/lib/database/types'
 
 export async function syncPrivyUserWithSupabase(privyUser: any) {
+  if (!isSupabaseConfigured()) {
+    console.warn('Supabase not configured, cannot sync user')
+    return null
+  }
+
   try {
+    const supabase = getSupabaseClient()
     // Get or create Supabase user
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email: privyUser.email?.address || 'temp@example.com',
@@ -39,7 +45,12 @@ export async function syncPrivyUserWithSupabase(privyUser: any) {
 }
 
 async function createUserProfile(userId: string, privyUser: any) {
+  if (!isSupabaseConfigured()) {
+    return
+  }
+
   try {
+    const supabase = getSupabaseClient()
     const profileData: Partial<UserProfile> = {
       id: userId,
       email: privyUser.email?.address,
@@ -60,7 +71,12 @@ async function createUserProfile(userId: string, privyUser: any) {
 }
 
 export async function getSupabaseUserFromPrivy(privyUser: any) {
+  if (!isSupabaseConfigured()) {
+    return null
+  }
+
   try {
+    const supabase = getSupabaseClient()
     // Try to find existing user by email
     if (privyUser.email?.address) {
       const { data: profiles } = await supabase
