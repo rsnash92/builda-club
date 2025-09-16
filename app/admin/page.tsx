@@ -8,7 +8,7 @@ export default function AdminPage() {
   const { user } = useSupabase()
   const [showTest, setShowTest] = useState(false)
   const [showTables, setShowTables] = useState(false)
-  const [tables, setTables] = useState<any[]>([])
+  const [tables, setTables] = useState<Array<{ table_name: string; columns: any[]; error?: string }>>([])
   const [loadingTables, setLoadingTables] = useState(false)
 
   const checkTables = async () => {

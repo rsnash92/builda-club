@@ -23,7 +23,7 @@ export async function GET() {
 
     // Get columns for each table
     const tableDetails = await Promise.all(
-      tables.map(async (table) => {
+      tables.map(async (table: { table_name: string }) => {
         const { data: columns, error: columnsError } = await supabaseAdmin!
           .from('information_schema.columns')
           .select('column_name, data_type, is_nullable, column_default')
