@@ -3,9 +3,22 @@ import { ClubService } from '@/lib/database/services'
 import { isSupabaseConfigured } from '@/lib/supabase'
 
 export async function GET(request: NextRequest) {
+  // Debug: Check environment variables
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  
+  console.log('Supabase URL:', supabaseUrl ? 'Set' : 'Not set')
+  console.log('Supabase Anon Key:', supabaseAnonKey ? 'Set' : 'Not set')
+  
   if (!isSupabaseConfigured()) {
     return NextResponse.json(
-      { error: 'Supabase not configured' },
+      { 
+        error: 'Supabase not configured',
+        debug: {
+          url: supabaseUrl ? 'Set' : 'Not set',
+          anonKey: supabaseAnonKey ? 'Set' : 'Not set'
+        }
+      },
       { status: 500 }
     )
   }
