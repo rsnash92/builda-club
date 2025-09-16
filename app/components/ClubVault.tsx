@@ -21,12 +21,14 @@ interface ClubVaultProps {
   clubId: string;
   memberTier: 'OBSERVER' | 'BUILDER' | 'PRO' | 'ELITE';
   memberAddress: string;
+  isAdmin?: boolean;
 }
 
 const ClubVault: React.FC<ClubVaultProps> = ({
   clubId,
   memberTier,
-  memberAddress
+  memberAddress,
+  isAdmin = false
 }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'content' | 'infrastructure' | 'assets' | 'upload'>('overview');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
