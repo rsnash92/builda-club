@@ -1,3 +1,7 @@
+/* Import template SCSS */
+@import "./assets/scss/main.scss";
+
+/* Keep Tailwind for utility classes */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
