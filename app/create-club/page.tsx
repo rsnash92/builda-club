@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Users, DollarSign, Settings, CreditCard } from 'lucide-react'
 import ModelSelection from '../components/ModelSelection'
+import { useSupabase } from '../contexts/SupabaseContext'
 
 interface ModelOption {
   id: string;
@@ -18,11 +19,16 @@ interface ModelOption {
 
 export default function CreateClub() {
   const router = useRouter()
+  const { user } = useSupabase()
   const [step, setStep] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
     type: 'development',
+    category: 'utility',
+    tokenSymbol: '',
     economicModel: null as ModelOption | null,
     initialFunding: 0,
     tokenDistribution: {
@@ -33,11 +39,44 @@ export default function CreateClub() {
     }
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Generate a mock club ID for demo purposes
-    const clubId = Math.random().toString(36).substr(2, 9)
-    router.push(`/club/${clubId}`)
+    
+    if (!user) {
+      setError('You must be logged in to create a club')
+      return
+    }
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch('/api/clubs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          description: formData.description,
+          category: formData.category,
+          token_symbol: formData.tokenSymbol || `$${formData.name.toUpperCase().slice(0, 4)}`,
+          treasury_balance: formData.initialFunding,
+          created_by: user.id
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to create club')
+      }
+
+      const { club } = await response.json()
+      router.push(`/club/${club.id}`)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const steps = [
@@ -110,6 +149,20 @@ export default function CreateClub() {
           </div>
         </div>
 
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+            <div className="flex">
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-red-800">Error</h3>
+                <div className="mt-2 text-sm text-red-700">
+                  <p>{error}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Step 1: Basic Info */}
           {step === 1 && (
@@ -159,6 +212,40 @@ export default function CreateClub() {
                     <option value="community">Community</option>
                     <option value="other">Other</option>
                   </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Category
+                  </label>
+                  <select
+                    value={formData.category}
+                    onChange={(e) => setFormData({...formData, category: e.target.value})}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="utility">Utility</option>
+                    <option value="gaming">Gaming</option>
+                    <option value="ai">AI</option>
+                    <option value="social">Social</option>
+                    <option value="money">Money</option>
+                    <option value="fun">Fun</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Token Symbol (optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.tokenSymbol}
+                    onChange={(e) => setFormData({...formData, tokenSymbol: e.target.value})}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder={`$${formData.name.toUpperCase().slice(0, 4)}`}
+                  />
+                  <p className="mt-1 text-sm text-gray-500">
+                    Leave empty to auto-generate from club name
+                  </p>
                 </div>
               </div>
             </div>
@@ -283,9 +370,10 @@ export default function CreateClub() {
             ) : (
               <button
                 type="submit"
-                className="btn btn-primary"
+                disabled={loading}
+                className="btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Create Club
+                {loading ? 'Creating...' : 'Create Club'}
               </button>
             )}
           </div>

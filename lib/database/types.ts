@@ -2,9 +2,19 @@ export interface Club {
   id: string
   name: string
   description?: string
+  category?: string
+  token_symbol?: string
   treasury_balance: number
   token_address?: string
   treasury_address?: string
+  thumbnail_url?: string
+  likes: number
+  is_hot: boolean
+  is_lord_of_dev: boolean
+  progress: number
+  market_cap: number
+  market_cap_change: number
+  volume: number
   created_at: string
   updated_at: string
   created_by: string
