@@ -42,20 +42,39 @@ Transform online communities into builder DAOs where members become co-owners, n
 ### For Communities
 1. **Create** - Set up your club in minutes
 2. **Pool** - Combine resources for shared tools
-3. **Govern** - Vote on treasury decisions
-4. **Grow** - BUIDL together, prosper together
+3. **Vault** - Build and share valuable IP together
+4. **Govern** - Vote on treasury decisions
+5. **Grow** - BUIDL together, prosper together
 
 ## 💎 Token Economics
 
 ### Community Club Tokens (Non-Tradeable)
 - **Purpose**: Prevent speculation, maintain focus on building
 - **Distribution**: 70% builders, 15% founders, 10% early, 5% treasury
-- **Mechanics**: Linear bonding curve with 10% exit slippage
+- **Pricing**: Fixed 1:1 token pricing - fair for everyone
 
 ### $BUIDL Platform Token
 - **Supply**: 1 billion fixed supply
 - **Utility**: Club creation, staking, governance, rewards
 - **Value**: Deflationary from burning, staking reduces supply
+
+### Fixed Token Pricing
+- **Fair**: 1 USDC = 1 Club Token, always the same rate
+- **Simple**: No complex bonding curves or price discovery
+- **Anti-Whale**: Prevents early members from getting unfair advantages
+- **Transparent**: Token value = Treasury ÷ Total Tokens
+
+### Club Vaults
+- **IP Creation**: Members build valuable intellectual property together
+- **Shared Resources**: Legitimate team plans and infrastructure
+- **Digital Assets**: NFT collections and treasury-owned assets
+- **Compound Value**: Vaults become more valuable as members contribute
+
+### Flexible Economic Models
+- **Fixed Buy-In**: One-time payment, lifetime membership
+- **Subscription**: Monthly/yearly recurring payments
+- **Tiered System**: Multiple levels from free to premium
+- **Community Governed**: Members vote on model changes
 
 ## 🚀 Getting Started
 

@@ -23,18 +23,17 @@ export class ClubToken {
   supply: number;
   tradeable: false; // CANNOT be transferred between wallets
   
-  // Bonding curve pricing
-  getPrice(supply: number, treasury: number): number {
-    const floorPrice = treasury / supply;
-    const socialPremium = 1.5; // 50% premium for social value
-    return floorPrice * socialPremium;
+  // Fixed 1:1 token pricing
+  getTokenPrice(): number {
+    // Always 1 USDC = 1 Club Token
+    return 1.0;
   }
   
-  // Exit penalty to discourage leaving
-  getExitPrice(amount: number): number {
-    const basePrice = this.getPrice(this.supply, this.treasury);
-    const exitPenalty = 0.1; // 10% penalty
-    return basePrice * amount * (1 - exitPenalty);
+  // Exit price calculation
+  getExitPrice(tokenAmount: number): number {
+    const treasuryShare = (tokenAmount * this.treasury) / this.totalSupply;
+    const exitPenalty = 0.1; // 10% exit fee
+    return treasuryShare * (1 - exitPenalty);
   }
 }
 ```
@@ -48,29 +47,87 @@ export class ClubToken {
 | Early Builders | 10% | 1 year | First 100 members |
 | Treasury | 5% | N/A | Club growth and development fund |
 
-### Bonding Curve Mechanics
+### Fixed Token Pricing Model
 
 ```javascript
-const BondingCurve = {
-  // Linear bonding curve
-  formula: "price = (treasury / supply) * social_premium",
+const FixedTokenModel = {
+  // Core principle: Fair pricing for everyone
+  philosophy: "1 USDC = 1 Club Token, always",
   
-  // Pricing factors
-  factors: {
-    treasury: "Total USDC in club treasury",
-    supply: "Total tokens in circulation",
-    socialPremium: "1.5-3x based on community activity",
-    exitPenalty: "10% penalty to discourage leaving"
+  // Token minting rules
+  minting: {
+    capitalTokens: {
+      rule: "1 USDC = 1 Token",
+      fair: "Same rate for everyone, forever",
+      example: "$1000 contribution = 1000 tokens"
+    },
+    
+    workTokens: {
+      rule: "Earned through building",
+      dailyCap: 100, // Max tokens per day
+      monthlyCap: 2000, // Max per month
+      totalCap: "Max 20% of capital tokens"
+    }
   },
   
-  // Example calculation
-  example: {
-    treasury: "$10,000",
-    supply: "1000 tokens",
-    floorPrice: "$10.00",
-    socialPremium: "2.0x",
-    currentPrice: "$20.00",
-    exitPrice: "$18.00" // 10% penalty
+  // Value calculation
+  tokenValue: {
+    formula: "Treasury ÷ Total Tokens = Token Value",
+    growth: "Token value increases as treasury grows",
+    example: {
+      month1: { treasury: 10000, tokens: 10000, value: 1.00 },
+      month6: { treasury: 50000, tokens: 30000, value: 1.67 },
+      year1: { treasury: 150000, tokens: 80000, value: 1.88 }
+    }
+  },
+  
+  // Fair for everyone
+  fairness: {
+    earlyMember: "Pays $100, gets 100 tokens",
+    lateMember: "Pays $100, gets 100 tokens", 
+    result: "Same price, different timing = fair"
+  }
+}
+```
+
+### Alternative Fair Pricing Models
+
+```javascript
+const AlternativeModels = {
+  // 1. Scholarship System
+  scholarship: {
+    basePrice: "$1000",
+    pool: "10% of treasury for scholarships",
+    application: "Apply with what you'll build",
+    sponsors: "Members vote on applications",
+    payback: "Optional: share future $BUIDL earnings"
+  },
+  
+  // 2. Contribution-Based Entry
+  contribution: {
+    options: [
+      { type: "MONEY", amount: "$500" },
+      { type: "CODE", requirement: "Ship a feature" },
+      { type: "CONTENT", requirement: "Create 10 tutorials" },
+      { type: "RECRUIT", requirement: "Bring 3 builders" }
+    ]
+  },
+  
+  // 3. Progressive Stake Model
+  progressive: {
+    entry: "$100 minimum",
+    progression: {
+      month1: "Observer - $100 stake",
+      month2: "Builder - Add $200 (total $300)",
+      month3: "Core - Add $300 (total $600)",
+      month6: "Elder - Add $400 (total $1000)"
+    },
+    benefits: {
+      observer: "1x $BUIDL rate",
+      builder: "1.5x $BUIDL rate",
+      core: "2x $BUIDL rate",
+      elder: "3x $BUIDL rate + governance"
+    }
   }
 }
 ```
@@ -82,6 +139,7 @@ const BondingCurve = {
 3. **Align Incentives**: Everyone builds together
 4. **Sustainable Growth**: Real value, not hype
 5. **Community Cohesion**: Members committed to long-term success
+6. **Democratic Pricing**: Members control their own pricing
 
 ## $BUIDL Platform Token
 
@@ -321,8 +379,9 @@ The builda.club token economics are designed to:
 2. **Create Value**: Non-tradeable club tokens focus on real value
 3. **Scale Sustainably**: Deflationary mechanics and network effects
 4. **Empower Communities**: Shared ownership and governance
+5. **Ensure Fairness**: Member-governed pricing prevents extraction
 
-The system creates a sustainable economy where builders are rewarded for creating value, communities own what they build, and the platform grows through network effects rather than speculation.
+The system creates a sustainable economy where builders are rewarded for creating value, communities own what they build, members control their own pricing democratically, and the platform grows through network effects rather than speculation.
 
 ---
 

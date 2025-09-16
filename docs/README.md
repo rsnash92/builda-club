@@ -8,6 +8,9 @@ Welcome to the builda.club documentation. This directory contains all the techni
 - **[Whitepaper v5.0](whitepaper-v5.0.md)** - Complete technical and economic overview
 - **[Architecture](architecture.md)** - Technical stack and system design
 - **[Tokenomics](tokenomics.md)** - Detailed token economics and mechanics
+- **[Economic Models](economic-models.md)** - Fixed, subscription, and tiered pricing systems
+- **[Alternative Pricing Models](alternative-pricing-models.md)** - Scholarship, contribution-based, and progressive pricing
+- **[Vault Economics](vault-economics.md)** - Club vaults and shared IP creation system
 - **[Roadmap](roadmap.md)** - Development phases and milestones
 
 ### Technical Guides

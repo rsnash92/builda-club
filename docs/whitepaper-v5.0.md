@@ -270,12 +270,12 @@ const ClubTokens = {
     sustainableGrowth: "Real value, not hype"
   },
   
-  // Bonding curve mechanics
+  // Fixed token pricing mechanics
   pricing: {
-    model: "Linear bonding curve",
-    floor: "Treasury NAV / token supply",
-    premium: "1.5-3x for social value",
-    slippage: "10% on exit to discourage leaving"
+    model: "Fixed 1:1 token pricing",
+    principle: "1 USDC = 1 Club Token, always",
+    mechanism: "Fair pricing for everyone, forever",
+    philosophy: "Same rate for early and late members"
   },
   
   // Distribution
@@ -363,6 +363,289 @@ const EarningBUIDL = {
 }
 ```
 
+## Fixed Token Pricing Model
+
+### Fair Pricing for Everyone
+
+```javascript
+const FixedTokenModel = {
+  // Core principle: No early whale advantages
+  philosophy: "1 USDC = 1 Club Token, always",
+  
+  // Token minting rules
+  minting: {
+    capitalTokens: {
+      rule: "1 USDC = 1 Token",
+      fair: "Same rate for everyone, forever",
+      example: "$1000 contribution = 1000 tokens"
+    },
+    
+    workTokens: {
+      rule: "Earned through building",
+      dailyCap: 100, // Max tokens per day
+      monthlyCap: 2000, // Max per month
+      totalCap: "Max 20% of capital tokens"
+    }
+  },
+  
+  // Value calculation
+  tokenValue: {
+    formula: "Treasury ÷ Total Tokens = Token Value",
+    growth: "Token value increases as treasury grows",
+    example: {
+      month1: { treasury: 10000, tokens: 10000, value: 1.00 },
+      month6: { treasury: 50000, tokens: 30000, value: 1.67 },
+      year1: { treasury: 150000, tokens: 80000, value: 1.88 }
+    }
+  },
+  
+  // Fair for everyone
+  fairness: {
+    earlyMember: "Pays $100, gets 100 tokens",
+    lateMember: "Pays $100, gets 100 tokens", 
+    result: "Same price, different timing = fair"
+  }
+}
+```
+
+### Preventing Early Whale Problems
+
+```javascript
+const AntiWhaleMeasures = {
+  // No bonding curve advantages
+  bondingCurve: {
+    old: "Early members get cheap tokens",
+    new: "Everyone pays same rate"
+  },
+  
+  // Fair value accrual
+  valueAccrual: {
+    method: "Treasury growth benefits all proportionally",
+    example: "If treasury doubles, everyone's tokens double in value",
+    result: "Returns based on contribution, not timing"
+  },
+  
+  // Work token caps
+  workTokens: {
+    dailyCap: 100,
+    monthlyCap: 2000,
+    totalCap: "Max 20% of capital tokens",
+    purpose: "Prevent gaming through excessive earning"
+  }
+}
+```
+
+## Member-Governed Pricing Model (Legacy)
+
+```javascript
+const MemberGovernedPricing = {
+  // Core principle
+  philosophy: "Members decide what their community is worth",
+  
+  // Pricing proposals
+  proposalSystem: {
+    whoCanPropose: "Any member with 30+ days",
+    proposalTypes: [
+      "INCREASE_PRICE",    // We're providing more value
+      "DECREASE_PRICE",    // We need more builders
+      "KEEP_SAME",         // Status quo
+      "DYNAMIC_ADJUST"     // Set rules for auto-adjust
+    ],
+    votingPeriod: "7 days",
+    quorum: "51% must vote",
+    threshold: "66% to pass"
+  },
+  
+  // Safeguards
+  limits: {
+    maxIncrease: "2x per quarter",
+    maxDecrease: "50% per quarter", 
+    minimumPrice: "$10", // Platform minimum
+    cooldown: "30 days between price votes"
+  }
+}
+```
+
+### Fair Pricing Mechanics
+
+```javascript
+const ValueBasedPricing = {
+  // Members vote on price based on actual value
+  considerations: {
+    treasurySize: "How much pooled resources",
+    activeBuilders: "How many contributing daily",
+    shippedProjects: "What we've built together",
+    resourcesAvailable: "Tools and subscriptions",
+    earnedBUIDL: "Average member earnings"
+  },
+  
+  // Transparent metrics dashboard
+  pricingDashboard: {
+    currentPrice: "$500",
+    treasuryPerMember: "$2,847",
+    avgMonthlyEarnings: "1,234 $BUIDL",
+    suggestion: "Treasury/member suggests $534 entry"
+  },
+  
+  // No speculation, just value
+  result: "Price reflects what members think is fair"
+}
+```
+
+### Alternative Fair Models
+
+```javascript
+const AlternativeModels = {
+  // 1. Scholarship System
+  scholarship: {
+    basePrice: "$1000",
+    pool: "10% of treasury for scholarships",
+    application: "Apply with what you'll build",
+    sponsors: "Members vote on applications",
+    payback: "Optional: share future $BUIDL earnings"
+  },
+  
+  // 2. Contribution-Based Entry
+  contribution: {
+    options: [
+      { type: "MONEY", amount: "$500" },
+      { type: "CODE", requirement: "Ship a feature" },
+      { type: "CONTENT", requirement: "Create 10 tutorials" },
+      { type: "RECRUIT", requirement: "Bring 3 builders" }
+    ]
+  },
+  
+  // 3. Progressive Stake Model
+  progressive: {
+    entry: "$100 minimum",
+    progression: {
+      month1: "Observer - $100 stake",
+      month2: "Builder - Add $200 (total $300)",
+      month3: "Core - Add $300 (total $600)",
+      month6: "Elder - Add $400 (total $1000)"
+    },
+    benefits: {
+      observer: "1x $BUIDL rate",
+      builder: "1.5x $BUIDL rate",
+      core: "2x $BUIDL rate",
+      elder: "3x $BUIDL rate + governance"
+    }
+  }
+}
+```
+
+### Smart Safeguards
+
+```javascript
+const PricingSafeguards = {
+  // Prevent extraction
+  antiWhale: {
+    rule: "No member can own >5% of club tokens",
+    purpose: "Prevents price manipulation"
+  },
+  
+  // Protect new members
+  observerRights: {
+    feature: "Observers can view price discussions",
+    benefit: "Transparent before joining"
+  },
+  
+  // Emergency measures
+  circuitBreaker: {
+    trigger: "If 20% members leave in 30 days",
+    action: "Auto-trigger price reduction vote",
+    purpose: "Responsive to market feedback"
+  },
+  
+  // Growth incentive
+  growthBonus: {
+    rule: "If membership grows 50% after price change",
+    reward: "Price setters get bonus $BUIDL",
+    purpose: "Align incentives with growth"
+  }
+}
+```
+
+## Club Vaults: Shared IP Creation Engine
+
+### The Vault Philosophy
+
+```javascript
+const VaultPhilosophy = {
+  traditional: {
+    approach: "Members consume content",
+    retention: "Low - leave when content consumed",
+    value: "Linear growth"
+  },
+  
+  buildaClubs: {
+    approach: "Members create and own IP together",
+    retention: "High - invested in what they helped create",
+    value: "Exponential growth through compounding"
+  },
+  
+  result: "Transform communities into intellectual property creation engines"
+}
+```
+
+### Vault Categories (100% Legal)
+
+```javascript
+const VaultCategories = {
+  // 1. Club-Created Content
+  createdContent: {
+    trading: "Proprietary strategies and trading bots",
+    development: "Codebases, tools, and integrations", 
+    creative: "Design systems and brand assets",
+    education: "Courses and learning materials",
+    value: "$50,000+ created annually per club"
+  },
+  
+  // 2. Legitimate Shared Infrastructure
+  infrastructure: {
+    teamPlans: "GitHub Organization, Figma Team, Vercel Team",
+    apiCredits: "OpenAI, AWS, Alchemy with rate limiting",
+    educational: "Legally purchased course libraries",
+    compliance: "All use proper team plans and licensing"
+  },
+  
+  // 3. Digital Asset Treasury
+  digitalAssets: {
+    utilityNFTs: "DAO passes, course access tokens",
+    brandAssets: "ENS domains, social handles",
+    investments: "Blue-chip NFTs, strategic tokens",
+    ownership: "Multi-sig controlled by treasury"
+  }
+}
+```
+
+### Vault Value Economics
+
+```javascript
+const VaultValue = {
+  // Example: 100-member developer club
+  yearOne: {
+    members: 100,
+    createdIP: {
+      codebases: 15, // Major projects
+      tools: 25,     // Utilities
+      tutorials: 50, // Educational content
+      templates: 30  // Reusable assets
+    },
+    totalValue: "$500,000",
+    costToCreate: "$50,000",
+    roi: "10x return on development investment"
+  },
+  
+  memberBenefits: {
+    investment: "$500 membership fee",
+    immediateValue: "$65,000+ in existing IP",
+    ongoingValue: "$90,000/year in new content",
+    totalROI: "130x return in year one"
+  }
+}
+```
+
 ## Community Economics
 
 ### The Builder's Economy
@@ -381,11 +664,12 @@ const BuilderEconomy = {
     
     // builda.club model
     withBuilda: {
-      joinFee: "$1000 once",
+      joinFee: "$500-1000 (member-governed)",
       gets: "All tools, learning, community",
       earns: "$BUIDL for contributing",
       saves: "$8,600 first year",
-      owns: "Equity in the community"
+      owns: "Equity in the community",
+      controls: "Votes on pricing and governance"
     }
   },
   
@@ -665,7 +949,8 @@ const CompetitiveAdvantage = {
   vsSpeculation: {
     focus: "BUIDL, don't trade",
     sustainable: "Non-tradeable club tokens",
-    value: "Real utility, not speculation"
+    value: "Real utility, not speculation",
+    pricing: "Member-governed, not algorithmic extraction"
   },
   
   // vs Traditional DAOs
@@ -681,6 +966,7 @@ const CompetitiveAdvantage = {
     culture: "Taps into BUIDL movement",
     token: "$BUIDL has cultural significance",
     model: "Non-tradeable + builder rewards",
+    pricing: "Member-governed fairness",
     network: "Builders want to build together"
   }
 }
@@ -779,6 +1065,7 @@ const WhyNow = {
 By combining:
 - **BUIDL culture** (building over speculation)
 - **Non-tradeable club tokens** (preventing pump & dumps)
+- **Member-governed pricing** (fair to all builders)
 - **$BUIDL rewards** (incentivizing builders)
 - **Modern tech stack** (Privy, Vercel, Supabase, thirdweb)
 - **Progressive disclosure** (crypto when ready)
