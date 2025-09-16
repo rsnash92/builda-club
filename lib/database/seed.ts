@@ -15,7 +15,7 @@ const sampleClubs = [
     market_cap_change: 233.00,
     volume: 41900,
     treasury_balance: 35600,
-    created_by: "00000000-0000-0000-0000-000000000001" // Placeholder UUID
+    created_by: null // Will be set to null for now
   },
   {
     name: "PaceTerminal",
