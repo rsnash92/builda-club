@@ -230,7 +230,7 @@ const EconomicModels: React.FC<EconomicModelsProps> = ({
                 {Object.entries(model.pricing.loyaltyDiscounts).map(([period, discount]) => (
                   <div key={period} className="bg-yellow-50 p-3 rounded-lg text-center">
                     <div className="font-semibold text-yellow-800">{period}</div>
-                    <div className="text-sm text-yellow-700">{discount}</div>
+                    <div className="text-sm text-yellow-700">{String(discount)}</div>
                   </div>
                 ))}
               </div>
