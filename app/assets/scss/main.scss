@@ -76,8 +76,7 @@
 // bootstrap five css
 @import "bootstrap/scss/bootstrap.scss";
 
-// Swiper css
-@import "swiper/swiper-bundle.css";
+// Swiper css - imported directly in layout.tsx
 
 // tabler icons
 @import "@tabler/icons-webfont/dist/tabler-icons.min.css";
