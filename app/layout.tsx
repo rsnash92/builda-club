@@ -1,13 +1,9 @@
 import type { Metadata } from 'next'
-import { Khula } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
-import './assets/scss/main.scss'
-import 'swiper/swiper-bundle.css'
 import { Providers } from './providers'
-import Bootstrap from '@/components/shared/Bootstrap'
-import Progress from '@/components/shared/Progress'
 
-const khula = Khula({ subsets: ['latin'], weight: ['300', '400', '600', '700', '800'], variable: '--khula' })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'builda.club - BUIDL Your Community\'s Future',
@@ -34,13 +30,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={khula.variable}>
-        <Progress />
-        <Bootstrap>
-          <Providers>
-            {children}
-          </Providers>
-        </Bootstrap>
+      <body className={inter.className}>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   )
