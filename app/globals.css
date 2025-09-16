@@ -1,5 +1,5 @@
 /* Import template SCSS */
-@import "./assets/scss/main.scss";
+@import "../assets/scss/main.scss";
 
 /* Keep Tailwind for utility classes */
 @tailwind base;
