@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Khula } from 'next/font/google'
 import './globals.css'
+import './assets/scss/main.scss'
 import { Providers } from './providers'
 import Bootstrap from '@/components/shared/Bootstrap'
 import Progress from '@/components/shared/Progress'
