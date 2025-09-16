@@ -31,7 +31,7 @@ const sampleClubs = [
     market_cap_change: -10.86,
     volume: 6700,
     treasury_balance: 148900,
-    created_by: "00000000-0000-0000-0000-000000000002"
+    created_by: null
   },
   {
     name: "zalascape95",
@@ -47,7 +47,7 @@ const sampleClubs = [
     market_cap_change: 20.39,
     volume: 5300,
     treasury_balance: 119500,
-    created_by: "00000000-0000-0000-0000-000000000003"
+    created_by: null
   },
   {
     name: "zero.fun",
@@ -63,7 +63,7 @@ const sampleClubs = [
     market_cap_change: 0.00,
     volume: 24.8,
     treasury_balance: 4800,
-    created_by: "00000000-0000-0000-0000-000000000004"
+    created_by: null
   },
   {
     name: "Meme Generator",
@@ -79,7 +79,7 @@ const sampleClubs = [
     market_cap_change: -18.37,
     volume: 162700,
     treasury_balance: 1200000,
-    created_by: "00000000-0000-0000-0000-000000000005"
+    created_by: null
   },
   {
     name: "YESNODAO",
@@ -95,7 +95,7 @@ const sampleClubs = [
     market_cap_change: 1.87,
     volume: 2500,
     treasury_balance: 116300,
-    created_by: "00000000-0000-0000-0000-000000000006"
+    created_by: null
   }
 ]
 
