@@ -5,6 +5,17 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft, Users, DollarSign, Settings, CreditCard } from 'lucide-react'
 import ModelSelection from '../components/ModelSelection'
 
+interface ModelOption {
+  id: string;
+  name: string;
+  type: 'FIXED' | 'SUBSCRIPTION' | 'TIERED';
+  description: string;
+  icon: string;
+  bestFor: string[];
+  examples: string[];
+  recommended: boolean;
+}
+
 export default function CreateClub() {
   const router = useRouter()
   const [step, setStep] = useState(1)
@@ -12,7 +23,7 @@ export default function CreateClub() {
     name: '',
     description: '',
     type: 'development',
-    economicModel: null,
+    economicModel: null as ModelOption | null,
     initialFunding: 0,
     tokenDistribution: {
       builders: 70,
