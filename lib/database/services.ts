@@ -13,11 +13,7 @@ export class ClubService {
     
     let query = client
       .from('clubs')
-      .select(`
-        *,
-        members!inner(count),
-        user_profiles!clubs_created_by_fkey(display_name, avatar_url)
-      `)
+      .select('*')
       .order('created_at', { ascending: false })
 
     if (filters?.category && filters.category !== "what's hot") {
@@ -43,7 +39,7 @@ export class ClubService {
       throw error
     }
 
-    return data as (Club & { member_count: number; creator_name: string; creator_avatar: string })[]
+    return data as Club[]
   }
 
   static async getClubById(id: string) {
@@ -127,11 +123,7 @@ export class ClubService {
     
     const { data, error } = await client
       .from('clubs')
-      .select(`
-        *,
-        members!inner(count),
-        user_profiles!clubs_created_by_fkey(display_name, avatar_url)
-      `)
+      .select('*')
       .eq('is_hot', true)
       .order('created_at', { ascending: false })
       .limit(limit)
@@ -141,7 +133,7 @@ export class ClubService {
       throw error
     }
 
-    return data as (Club & { member_count: number; creator_name: string; creator_avatar: string })[]
+    return data as Club[]
   }
 }
 
