@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Users, DollarSign, Settings } from 'lucide-react'
+import { ArrowLeft, Users, DollarSign, Settings, CreditCard } from 'lucide-react'
+import ModelSelection from '../components/ModelSelection'
 
 export default function CreateClub() {
   const router = useRouter()
@@ -11,6 +12,7 @@ export default function CreateClub() {
     name: '',
     description: '',
     type: 'development',
+    economicModel: null,
     initialFunding: 0,
     tokenDistribution: {
       builders: 70,
@@ -29,8 +31,9 @@ export default function CreateClub() {
 
   const steps = [
     { number: 1, title: 'Basic Info', icon: Settings },
-    { number: 2, title: 'Treasury', icon: DollarSign },
-    { number: 3, title: 'Members', icon: Users },
+    { number: 2, title: 'Economic Model', icon: CreditCard },
+    { number: 3, title: 'Treasury', icon: DollarSign },
+    { number: 4, title: 'Members', icon: Users },
   ]
 
   return (
@@ -150,8 +153,23 @@ export default function CreateClub() {
             </div>
           )}
 
-          {/* Step 2: Treasury */}
+          {/* Step 2: Economic Model */}
           {step === 2 && (
+            <div className="bg-white p-8 rounded-lg shadow">
+              <h2 className="text-xl font-semibold mb-6">Choose Economic Model</h2>
+              <ModelSelection 
+                onModelSelect={(model) => {
+                  setFormData({...formData, economicModel: model})
+                  setStep(3)
+                }}
+                currentStep={2}
+                totalSteps={4}
+              />
+            </div>
+          )}
+
+          {/* Step 3: Treasury */}
+          {step === 3 && (
             <div className="bg-white p-8 rounded-lg shadow">
               <h2 className="text-xl font-semibold mb-6">Treasury Setup</h2>
               <div className="space-y-6">
@@ -198,8 +216,8 @@ export default function CreateClub() {
             </div>
           )}
 
-          {/* Step 3: Members */}
-          {step === 3 && (
+          {/* Step 4: Members */}
+          {step === 4 && (
             <div className="bg-white p-8 rounded-lg shadow">
               <h2 className="text-xl font-semibold mb-6">Member Settings</h2>
               <div className="space-y-6">
@@ -243,7 +261,7 @@ export default function CreateClub() {
               Previous
             </button>
             
-            {step < 3 ? (
+            {step < 4 ? (
               <button
                 type="button"
                 onClick={() => setStep(step + 1)}

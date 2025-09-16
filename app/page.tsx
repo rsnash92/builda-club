@@ -138,6 +138,9 @@ export default function Home() {
               <Link href="/projects" className="text-gray-400 hover:text-white transition-colors">
                 projects
               </Link>
+              <Link href="/economics" className="text-gray-400 hover:text-white transition-colors">
+                economics
+              </Link>
             </nav>
             
             {/* Search Bar */}

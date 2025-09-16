@@ -24,8 +24,15 @@ import {
   DollarSign,
   Vote,
   FileText,
-  TrendingUp
+  TrendingUp,
+  CreditCard,
+  Gem,
+  Hammer
 } from 'lucide-react'
+import ClubEconomicsDashboard from '../../components/ClubEconomicsDashboard'
+import OwnershipDashboard from '../../components/OwnershipDashboard'
+import MintingGovernance from '../../components/MintingGovernance'
+import ClubVault from '../../components/ClubVault'
 
 export default function ClubDashboard() {
   const params = useParams()
@@ -65,10 +72,13 @@ export default function ClubDashboard() {
   // Club management tabs for header
   const managementTabs = [
     { id: 'overview', label: 'Overview', icon: TrendingUp },
+    { id: 'economics', label: 'Economics', icon: CreditCard },
+    { id: 'ownership', label: 'My Tokens', icon: Gem },
+    { id: 'minting', label: 'Earn Tokens', icon: Hammer },
+    { id: 'vault', label: 'Club Vault', icon: FileText },
     { id: 'treasury', label: 'Treasury', icon: DollarSign },
     { id: 'members', label: 'Members', icon: Users },
     { id: 'governance', label: 'Governance', icon: Vote },
-    { id: 'resources', label: 'Resources', icon: FileText },
     { id: 'settings', label: 'Settings', icon: Settings },
   ]
 
@@ -384,10 +394,41 @@ export default function ClubDashboard() {
                 </button>
               </div>
               
+              {activeManagementTab === 'economics' && (
+                <ClubEconomicsDashboard 
+                  clubId={clubId}
+                  memberAddress="0x1234...5678"
+                  isAdmin={true}
+                  currentModel="TIERED"
+                />
+              )}
+              {activeManagementTab === 'ownership' && (
+                <OwnershipDashboard 
+                  memberAddress="0x1234...5678"
+                  clubId={clubId}
+                  memberTokens={{ purchased: 500, earned: 110, total: 610 }}
+                  clubMetrics={{ treasury: 75000, totalTokens: 50000, tokenValue: 1.50, memberCount: 247 }}
+                />
+              )}
+              {activeManagementTab === 'minting' && (
+                <MintingGovernance 
+                  clubId={clubId}
+                  memberAddress="0x1234...5678"
+                  isApprovedMinter={true}
+                  canVote={true}
+                />
+              )}
+              {activeManagementTab === 'vault' && (
+                <ClubVault 
+                  clubId={clubId}
+                  memberAddress="0x1234...5678"
+                  memberTier="PRO"
+                  isAdmin={true}
+                />
+              )}
               {activeManagementTab === 'treasury' && <TreasuryTab clubData={clubData} />}
               {activeManagementTab === 'members' && <MembersTab clubData={clubData} />}
               {activeManagementTab === 'governance' && <GovernanceTab clubData={clubData} />}
-              {activeManagementTab === 'resources' && <ResourcesTab clubData={clubData} />}
               {activeManagementTab === 'settings' && <SettingsTab clubData={clubData} />}
             </div>
           </div>
