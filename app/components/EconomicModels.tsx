@@ -321,31 +321,36 @@ const EconomicModels: React.FC<EconomicModelsProps> = ({
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold mb-4">📈 Revenue Projections (1000 Member Club)</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {Object.entries(revenueComparison).map(([model, data]: [string, any]) => (
+              {revenueComparison ? Object.entries(revenueComparison).map(([model, data]: [string, any]) => (
                 <div key={model} className="bg-gray-50 p-4 rounded-lg">
                   <h4 className="font-semibold mb-3 capitalize">{model} Model</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Members:</span>
-                      <span className="font-medium">{data.members.toLocaleString()}</span>
+                      <span className="font-medium">{data.members?.toLocaleString() || '0'}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Monthly Revenue:</span>
-                      <span className="font-medium">${data.monthlyRevenue.toLocaleString()}</span>
+                      <span className="font-medium">${data.monthlyRevenue?.toLocaleString() || '0'}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Yearly Revenue:</span>
-                      <span className="font-medium">${data.yearlyRevenue.toLocaleString()}</span>
+                      <span className="font-medium">${data.yearlyRevenue?.toLocaleString() || '0'}</span>
                     </div>
                     {data.totalRaised && (
                       <div className="flex justify-between">
                         <span>Total Raised:</span>
-                        <span className="font-medium">${data.totalRaised.toLocaleString()}</span>
+                        <span className="font-medium">${data.totalRaised?.toLocaleString() || '0'}</span>
                       </div>
                     )}
                   </div>
                 </div>
-              ))}
+              )) : (
+                <div className="col-span-3 text-center py-8 text-gray-500">
+                  <div className="text-4xl mb-2">📊</div>
+                  <div>Revenue data loading...</div>
+                </div>
+              )}
             </div>
           </div>
         </div>
