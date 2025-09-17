@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { 
   LayoutDashboard, 
-  Parachute, 
+  Plane, 
   Play, 
   Box, 
   Search, 
@@ -15,7 +15,7 @@ import {
 
 const navigationItems = [
   { id: 'dashboard', icon: LayoutDashboard, href: '/', label: 'Dashboard' },
-  { id: 'parachute', icon: Parachute, href: '/parachute', label: 'Parachute' },
+  { id: 'parachute', icon: Plane, href: '/parachute', label: 'Parachute' },
   { id: 'play', icon: Play, href: '/play', label: 'Play' },
   { id: 'box', icon: Box, href: '/box', label: 'Box' },
   { id: 'search', icon: Search, href: '/search', label: 'Search' },
