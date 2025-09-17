@@ -20,7 +20,7 @@ const mockClub = {
   treasury_balance: 148900,
   token_address: '0x1234567890abcdef',
   treasury_address: '0xabcdef1234567890',
-  thumbnail_url: null,
+  thumbnail_url: undefined,
   likes: 1247,
   is_hot: true,
   is_lord_of_dev: false,
