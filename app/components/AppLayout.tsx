@@ -101,7 +101,7 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
   return (
     <div className="h-screen bg-black flex">
       {/* Collapsible Sidebar */}
-      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-gray-900 transition-all duration-300 ease-in-out flex flex-col`}>
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-black transition-all duration-300 ease-in-out flex flex-col`}>
         {/* Header with Logo and Menu */}
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           {!sidebarCollapsed && (
@@ -214,9 +214,9 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col bg-[#16141A]">
+      <div className="flex-1 flex flex-col bg-black">
         {/* Top Header Bar */}
-        <header className="bg-[#16141A] border-b border-gray-600 px-6 py-4">
+        <header className="bg-black border-b border-gray-600 px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-bold text-white">{pageTitle}</h1>
