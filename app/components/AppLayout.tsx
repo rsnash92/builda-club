@@ -101,7 +101,7 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
   return (
     <div className="h-screen bg-black flex">
       {/* Collapsible Sidebar */}
-      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-black transition-all duration-300 ease-in-out flex flex-col`}>
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-black border-r border-gray-800 transition-all duration-300 ease-in-out flex flex-col`}>
         {/* Header with Logo and Menu */}
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           {!sidebarCollapsed && (

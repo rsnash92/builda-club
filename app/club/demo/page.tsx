@@ -42,22 +42,6 @@ export default function DemoClubPage() {
   return (
     <AppLayout pageTitle="BUIDLers United">
       <div className="px-6 py-8">
-        {/* Navigation Header */}
-        <div className="border-b border-gray-800 pb-4 mb-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button className="flex items-center text-gray-400 hover:text-white transition-colors">
-                <ChevronLeft className="h-5 w-5 mr-1" />
-                <span>Clubs</span>
-              </button>
-            </div>
-            <button className="flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
-              <Share2 className="h-4 w-4" />
-              <span>Share to Earn</span>
-            </button>
-          </div>
-        </div>
-
         {/* Main Content */}
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
