@@ -1,40 +1,29 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, Flame, Gamepad2, Brain, Wrench, MessageCircle, DollarSign, PartyPopper, Heart, Users, Crown, TrendingUp, TrendingDown } from 'lucide-react'
+import { Search, Flame, Gamepad2, Brain, Wrench, MessageCircle, DollarSign, PartyPopper, Heart, Users, Crown, TrendingUp, TrendingDown, ChevronDown, Clock, UserPlus } from 'lucide-react'
 import { AppLayout } from './components/AppLayout'
 import { useClubs } from '@/lib/hooks/useClubs'
 import { useState } from 'react'
 
-const categories = [
-  { name: "what's hot", icon: Flame, isDropdown: true },
-  { name: "gaming", icon: Gamepad2, isDropdown: false },
-  { name: "ai", icon: Brain, isDropdown: false },
-  { name: "utility", icon: Wrench, isDropdown: false },
-  { name: "social", icon: MessageCircle, isDropdown: false },
-  { name: "money", icon: DollarSign, isDropdown: false },
-  { name: "fun", icon: PartyPopper, isDropdown: false }
+const filterOptions = [
+  { id: 'newest', label: 'Newest', active: true },
+  { id: 'trending', label: 'Trending', active: false },
+  { id: 'volume', label: 'Volume', active: false },
+  { id: 'ending', label: 'Ending', active: false },
+  { id: 'open', label: 'Open', active: false, hasDropdown: true },
+  { id: 'all-tokens', label: 'All Tokens', active: false, hasDropdown: true },
 ]
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("what's hot")
   const [searchQuery, setSearchQuery] = useState("")
+  const [activeFilter, setActiveFilter] = useState('newest')
 
   // Use dynamic data instead of static
   const { clubs, loading, error } = useClubs({
-    category: selectedCategory === "what's hot" ? undefined : selectedCategory,
     search: searchQuery || undefined,
     limit: 20
   })
-
-  const formatMarketCap = (value: number) => {
-    if (value >= 1000000) {
-      return `$${(value / 1000000).toFixed(1)}M`
-    } else if (value >= 1000) {
-      return `$${(value / 1000).toFixed(1)}K`
-    }
-    return `$${value.toFixed(2)}`
-  }
 
   const formatVolume = (value: number) => {
     if (value >= 1000000) {
@@ -45,84 +34,80 @@ export default function Home() {
     return `$${value.toFixed(2)}`
   }
 
-  const formatChange = (value: number) => {
-    const sign = value >= 0 ? '+' : ''
-    return `${sign}${value.toFixed(2)}%`
+  const getClubThumbnail = (club: any) => {
+    if (club.thumbnail_url) {
+      return club.thumbnail_url
+    }
+    
+    // Generate gradient based on category
+    const gradients = {
+      crypto: 'from-yellow-400 to-orange-500',
+      gaming: 'from-green-400 to-blue-500',
+      ai: 'from-blue-400 to-purple-500',
+      utility: 'from-orange-400 to-red-500',
+      social: 'from-pink-400 to-purple-500',
+      fun: 'from-yellow-400 to-pink-500'
+    }
+    
+    return `bg-gradient-to-br ${gradients[club.category as keyof typeof gradients] || 'from-violet-400 to-purple-500'}`
+  }
+
+  const getClubEmoji = (club: any) => {
+    const emojis = {
+      crypto: '₿',
+      gaming: '🎮',
+      ai: '🤖',
+      utility: '🔧',
+      social: '💬',
+      fun: '🎉'
+    }
+    return emojis[club.category as keyof typeof emojis] || '🏗️'
   }
 
   return (
-    <AppLayout pageTitle="Communities">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 to-slate-800 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              BUIDL & Earn
-            </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Transform online communities into builder DAOs where members become co-owners, not subscribers.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/create-club"
-                className="btn btn-primary px-8 py-3 text-lg"
-              >
-                Create Club
-              </Link>
-              <Link
-                href="/whitepaper"
-                className="btn btn-secondary px-8 py-3 text-lg"
-              >
-                Read Whitepaper
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Search and Filters */}
-      <section className="py-8 bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Search */}
-            <div className="flex-1">
+    <AppLayout pageTitle="Clubs">
+      <div className="p-6">
+        {/* Top Search Bar */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-4">
+            <h1 className="text-2xl font-bold text-white">Crypto</h1>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <input
                   type="text"
-                  placeholder="Find the next 100x community..."
+                placeholder="Q Search clubs"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent bg-slate-800 text-white placeholder-gray-400"
+                className="w-64 pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
+          </div>
+          <button className="flex items-center space-x-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors">
+            <UserPlus className="h-4 w-4" />
+            <span>Sign In</span>
+          </button>
             </div>
 
-            {/* Category Filters */}
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
+        {/* Filter Buttons */}
+        <div className="flex items-center space-x-4 mb-6">
+          {filterOptions.map((option) => (
                 <button
-                  key={category.name}
-                  onClick={() => setSelectedCategory(category.name)}
-                  className={`btn px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${
-                    selectedCategory === category.name
-                      ? 'btn-primary'
-                      : 'btn-secondary'
-                  }`}
-                >
-                  <category.icon className="h-4 w-4" />
-                  <span className="capitalize">{category.name}</span>
-                  {category.isDropdown && <span className="text-xs">▼</span>}
+              key={option.id}
+              onClick={() => setActiveFilter(option.id)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeFilter === option.id
+                  ? 'bg-violet-600 text-white'
+                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              {option.label}
+              {option.hasDropdown && (
+                <ChevronDown className="inline h-3 w-3 ml-1" />
+              )}
                 </button>
               ))}
-            </div>
-          </div>
         </div>
-      </section>
 
-      {/* Communities Grid */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Loading State */}
           {loading && (
             <div className="flex justify-center items-center py-12">
@@ -133,112 +118,93 @@ export default function Home() {
           {/* Error State */}
           {error && (
             <div className="text-center py-12">
-              <p className="text-red-400 mb-4">Error loading communities: {error}</p>
+            <p className="text-red-400 mb-4">Error loading clubs: {error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="btn btn-primary"
+              className="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700"
               >
                 Retry
               </button>
             </div>
           )}
 
-          {/* Communities Grid */}
+        {/* Clubs Grid */}
           {!loading && !error && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {clubs.map((club) => (
-                <div key={club.id} className="card hover:shadow-lg transition-shadow">
-                  {/* Thumbnail */}
-                  <div className="relative">
+              <div key={club.id} className="bg-gray-800 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                {/* USDC Badge */}
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                    USDC
+                  </span>
+                </div>
+
+                {/* Club Thumbnail */}
+                <div className="relative h-48">
                     {club.thumbnail_url ? (
                       <img
                         src={club.thumbnail_url}
                         alt={club.name}
-                        className="w-full h-48 object-cover rounded-t-lg"
+                      className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div
-                        className="w-full h-48 bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center rounded-t-lg"
-                      >
-                        <div className="text-4xl font-bold text-white">
-                          {club.name.charAt(0)}
-                        </div>
+                    <div className={`w-full h-full ${getClubThumbnail(club)} flex items-center justify-center`}>
+                      <span className="text-6xl">{getClubEmoji(club)}</span>
                       </div>
                     )}
+                </div>
 
-                    {/* Badges */}
-                    <div className="absolute top-2 right-2 flex gap-1">
-                      {club.is_hot && (
-                        <span className="bg-yellow-500/20 text-yellow-300 text-xs font-medium px-2 py-1 rounded-full flex items-center gap-1 border border-yellow-500/30">
-                          <Flame className="h-3 w-3" />
-                          HOT
-                        </span>
-                      )}
-                      {club.is_lord_of_dev && (
-                        <span className="bg-violet-500/20 text-violet-300 text-xs font-medium px-2 py-1 rounded-full flex items-center gap-1 border border-violet-500/30">
-                          <Crown className="h-3 w-3" />
-                          LORD OF DEV
-                        </span>
-                      )}
+                {/* Club Content */}
+                <div className="p-4">
+                  <h3 className="text-white font-bold text-sm mb-3 line-clamp-2">
+                    {club.name}
+                  </h3>
+
+                  {/* Progress Bar */}
+                  <div className="mb-4">
+                    <div className="flex justify-between text-xs text-gray-400 mb-1">
+                      <span>Active</span>
+                      <span>Inactive</span>
                     </div>
-
-                    {/* Category Tag */}
-                    <div className="absolute top-2 left-2">
-                      <span className="bg-gray-700/50 text-gray-200 text-xs font-medium px-2 py-1 rounded-full border border-gray-600/50">
-                        {club.category || 'utility'}
-                      </span>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div
+                        className="bg-gradient-to-r from-green-500 to-purple-500 h-2 rounded-full"
+                        style={{ width: `${club.progress || 75}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
+                      <span className="text-green-400">{club.progress || 75}%</span>
+                      <span className="text-purple-400">{100 - (club.progress || 75)}%</span>
                     </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-6">
-                    <h3 className="text-lg font-semibold text-white mb-2">{club.name}</h3>
-                    <p className="text-sm text-gray-400 mb-4">by {club.created_by}</p>
+                  {/* Action Buttons */}
+                  <div className="flex space-x-2 mb-4">
+                    <button className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+                      JOIN
+                    </button>
+                    <button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+                      VIEW
+                    </button>
+                  </div>
 
-                    {/* Engagement Metrics */}
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="flex items-center gap-1 text-gray-400">
-                        <Heart className="h-4 w-4" />
-                        <span className="text-sm">{club.likes}</span>
+                  {/* Bottom Info */}
+                  <div className="flex items-center justify-between text-xs text-gray-400">
+                    <div className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-1">
+                        <div className="w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                        <span>+{club.likes || Math.floor(Math.random() * 1000)}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-gray-400">
-                        <Users className="h-4 w-4" />
-                        <span className="text-sm">0</span>
+                      <div className="flex items-center space-x-1">
+                        <DollarSign className="h-3 w-3" />
+                        <span>{formatVolume(club.market_cap || Math.floor(Math.random() * 100000))}</span>
                       </div>
                     </div>
-
-                    <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                      {club.description || 'No description available'}
-                    </p>
-
-                    {/* Financial Metrics */}
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <button className="btn btn-secondary text-xs px-3 py-1">
-                          {club.token_symbol || '$CLUB'}
-                        </button>
-                        <div className="text-right">
-                          <div className="text-sm font-semibold text-white">
-                            {formatMarketCap(club.market_cap)}
-                            <span className={`ml-1 text-xs ${
-                              club.market_cap_change >= 0 ? 'text-green-400' : 'text-red-400'
-                            }`}>
-                              {formatChange(club.market_cap_change)}
-                            </span>
-                          </div>
-                          <div className="text-xs text-gray-400">
-                            vol: {formatVolume(club.volume)}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Progress Bar */}
-                      <div className="w-full bg-gray-700 rounded-full h-1">
-                        <div
-                          className="bg-violet-500 h-1 rounded-full"
-                          style={{ width: `${club.progress}%` }}
-                        ></div>
-                      </div>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="h-3 w-3" />
+                      <span>Live</span>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -249,17 +215,16 @@ export default function Home() {
           {/* Empty State */}
           {!loading && !error && clubs.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-400 mb-4">No communities found</p>
+            <p className="text-gray-400 mb-4">No clubs found</p>
               <Link
                 href="/create-club"
-                className="btn btn-primary"
+              className="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700"
               >
                 Create the first club
               </Link>
             </div>
           )}
         </div>
-      </section>
     </AppLayout>
   )
 }

@@ -37,7 +37,7 @@ interface AppLayoutProps {
 
 const navigationItems = [
   { id: 'home', icon: Home, href: '/', label: 'Home' },
-  { id: 'markets', icon: LayoutDashboard, href: '/', label: 'Markets' },
+  { id: 'clubs', icon: LayoutDashboard, href: '/', label: 'Clubs' },
   { id: 'leaderboard', icon: Trophy, href: '/leaderboard', label: 'Leaderboard' },
   { id: 'earn', icon: DollarSign, href: '/earn', label: 'Earn' },
   { id: 'news', icon: Newspaper, href: '/news', label: 'News' },
