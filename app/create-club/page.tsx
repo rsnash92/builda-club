@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft, Users, DollarSign, Settings, CreditCard } from 'lucide-react'
 import ModelSelection from '../components/ModelSelection'
 import { useSupabase } from '../contexts/SupabaseContext'
+import { AppLayout } from '../components/AppLayout'
 
 interface ModelOption {
   id: string;
@@ -87,25 +88,24 @@ export default function CreateClub() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="px-6 py-4">
+    <AppLayout pageTitle="Create Your Club">
+      <div className="p-6">
+        {/* Header */}
+        <div className="mb-8">
           <div className="flex items-center space-x-4">
             <button 
               onClick={() => router.back()}
-              className="flex items-center text-gray-600 hover:text-gray-900"
+              className="flex items-center text-gray-400 hover:text-white"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
               Back
             </button>
-            <div className="h-6 w-px bg-gray-300"></div>
-            <h1 className="text-2xl font-bold text-gray-900">Create Your Club</h1>
+            <div className="h-6 w-px bg-gray-600"></div>
+            <h1 className="text-2xl font-bold text-white">Create Your Club</h1>
           </div>
         </div>
-      </header>
 
-      <div className="max-w-4xl mx-auto px-6 py-8">
+        <div className="max-w-4xl mx-auto">
         {/* Progress Steps */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
@@ -378,7 +378,8 @@ export default function CreateClub() {
             )}
           </div>
         </form>
+        </div>
       </div>
-    </div>
+    </AppLayout>
   )
 }

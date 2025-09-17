@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import SupabaseTest from '../components/SupabaseTest'
 import { useSupabase } from '../contexts/SupabaseContext'
+import { AppLayout } from '../components/AppLayout'
 
 export default function AdminPage() {
   const { user } = useSupabase()
@@ -42,13 +43,14 @@ export default function AdminPage() {
   // }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Admin Panel</h1>
+    <AppLayout pageTitle="Admin Panel">
+      <div className="p-6">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold text-white mb-8">Admin Panel</h1>
         
-        <div className="space-y-6">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Database Management</h2>
+          <div className="space-y-6">
+            <div className="bg-slate-800 p-6 rounded-lg shadow">
+              <h2 className="text-xl font-semibold mb-4 text-white">Database Management</h2>
             <div className="space-y-4">
               <div className="flex space-x-4">
                 <button
@@ -99,8 +101,8 @@ export default function AdminPage() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+            <div className="bg-slate-800 p-6 rounded-lg shadow">
+              <h2 className="text-xl font-semibold mb-4 text-white">Quick Actions</h2>
             <div className="space-y-2">
               <a 
                 href="/" 
@@ -124,9 +126,9 @@ export default function AdminPage() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Database Schema</h2>
-            <div className="text-sm text-gray-600 space-y-2">
+            <div className="bg-slate-800 p-6 rounded-lg shadow">
+              <h2 className="text-xl font-semibold mb-4 text-white">Database Schema</h2>
+              <div className="text-sm text-gray-300 space-y-2">
               <p><strong>Tables created:</strong></p>
               <ul className="list-disc list-inside ml-4 space-y-1">
                 <li>clubs - Main club data with categories, metrics, etc.</li>
@@ -143,8 +145,9 @@ export default function AdminPage() {
               </ul>
             </div>
           </div>
+          </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   )
 }

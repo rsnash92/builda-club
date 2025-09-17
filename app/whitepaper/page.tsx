@@ -1,50 +1,49 @@
 import Link from 'next/link'
 import { ArrowLeft, Download, Share2 } from 'lucide-react'
+import { AppLayout } from '../components/AppLayout'
 
 export default function WhitepaperPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <AppLayout pageTitle="Whitepaper">
       {/* Header */}
-      <header className="border-b bg-white">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-2 text-gray-600 hover:text-gray-900">
-                <ArrowLeft className="h-5 w-5" />
-                <span>Back to Home</span>
-              </Link>
-              <div className="h-6 w-px bg-gray-300"></div>
-              <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600"></div>
-                <span className="text-2xl font-bold text-gray-900">builda.club</span>
-              </div>
-            </div>
-            <div className="flex space-x-4">
-              <button className="btn btn-secondary px-4 py-2">
-                <Share2 className="h-4 w-4 mr-2" />
-                Share
-              </button>
-              <button className="btn btn-primary px-4 py-2">
-                <Download className="h-4 w-4 mr-2" />
-                Download PDF
-              </button>
+      <div className="p-6 border-b border-gray-600">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Link href="/" className="flex items-center space-x-2 text-gray-400 hover:text-white">
+              <ArrowLeft className="h-5 w-5" />
+              <span>Back to Home</span>
+            </Link>
+            <div className="h-6 w-px bg-gray-600"></div>
+            <div className="flex items-center space-x-2">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600"></div>
+              <span className="text-2xl font-bold text-white">builda.club</span>
             </div>
           </div>
+          <div className="flex space-x-4">
+            <button className="btn btn-secondary px-4 py-2">
+              <Share2 className="h-4 w-4 mr-2" />
+              Share
+            </button>
+            <button className="btn btn-primary px-4 py-2">
+              <Download className="h-4 w-4 mr-2" />
+              Download PDF
+            </button>
+          </div>
         </div>
-      </header>
+      </div>
 
       {/* Whitepaper Content */}
-      <main className="py-12">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+      <main className="p-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-slate-800 rounded-lg shadow-lg p-8">
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              <h1 className="text-4xl font-bold text-white mb-4">
                 builda.club Whitepaper v5.0
               </h1>
-              <p className="text-xl text-gray-600 italic mb-6">
+              <p className="text-xl text-gray-300 italic mb-6">
                 BUIDL Your Community's Future
               </p>
-              <div className="flex justify-center space-x-8 text-sm text-gray-500">
+              <div className="flex justify-center space-x-8 text-sm text-gray-400">
                 <span>Version 5.0</span>
                 <span>•</span>
                 <span>December 2024</span>
@@ -403,7 +402,7 @@ export default function WhitepaperPage() {
           </div>
         </div>
       </main>
-    </div>
+    </AppLayout>
   )
 }
 

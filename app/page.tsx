@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Search, Flame, Gamepad2, Brain, Wrench, MessageCircle, DollarSign, PartyPopper, Heart, Users, Crown, TrendingUp, TrendingDown } from 'lucide-react'
-import { Header } from './components/Header'
+import { AppLayout } from './components/AppLayout'
 import { useClubs } from '@/lib/hooks/useClubs'
 import { useState } from 'react'
 
@@ -51,12 +51,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
-      {/* Header */}
-      <Header />
-
+    <AppLayout pageTitle="Communities">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 to-slate-800 py-20 pt-32">
+      <section className="bg-gradient-to-br from-slate-900 to-slate-800 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
@@ -263,6 +260,6 @@ export default function Home() {
           )}
         </div>
       </section>
-    </div>
+    </AppLayout>
   )
 }
