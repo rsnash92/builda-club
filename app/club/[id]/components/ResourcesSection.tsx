@@ -241,10 +241,12 @@ export function ResourcesSection({ club }: ResourcesSectionProps) {
                           <span className="text-white">{resource.usage}</span>
                         </div>
                       )}
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-400">Cost:</span>
-                        <span className="text-white">{resource.cost}</span>
-                      </div>
+                      {'cost' in resource && (
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-gray-400">Cost:</span>
+                          <span className="text-white">{resource.cost}</span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex space-x-2">
