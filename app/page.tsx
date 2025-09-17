@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, Flame, Gamepad2, Brain, Wrench, MessageCircle, DollarSign, PartyPopper, Heart, Users, Crown, TrendingUp, TrendingDown, ChevronDown, Clock, UserPlus } from 'lucide-react'
+import { Search, Flame, Gamepad2, Brain, Wrench, MessageCircle, DollarSign, PartyPopper, Heart, Users, Crown, TrendingUp, TrendingDown, ChevronDown, Clock, UserPlus, Hammer, Wrench as WrenchIcon } from 'lucide-react'
 import { AppLayout } from './components/AppLayout'
 import { useClubs } from '@/lib/hooks/useClubs'
 import { useState } from 'react'
@@ -62,6 +62,32 @@ export default function Home() {
       fun: '🎉'
     }
     return emojis[club.category as keyof typeof emojis] || '🏗️'
+  }
+
+  const getBuildingStatus = (club: any) => {
+    const buildingStatuses = {
+      crypto: ['Building: DeFi protocol', 'Shipped: 2 dApps this month', 'Building: NFT marketplace'],
+      gaming: ['Building: P2E game', 'Shipped: 3 game modes', 'Building: Metaverse world'],
+      ai: ['Building: AI trading bot', 'Shipped: ML model v2.0', 'Building: Chat assistant'],
+      utility: ['Building: Developer tools', 'Shipped: 5 APIs this week', 'Building: Analytics dashboard'],
+      social: ['Building: Social platform', 'Shipped: 3 features', 'Building: Community hub'],
+      fun: ['Building: Meme generator', 'Shipped: 10 templates', 'Building: NFT collection']
+    }
+    
+    const statuses = buildingStatuses[club.category as keyof typeof buildingStatuses] || ['Building: Web3 project', 'Shipped: 2 features', 'Building: Community tools']
+    return statuses[Math.floor(Math.random() * statuses.length)]
+  }
+
+  const getOnlineBuilders = () => {
+    return Math.floor(Math.random() * 50) + 1 // 1-50 builders online
+  }
+
+  const getBuilderCount = (club: any) => {
+    return Math.floor(Math.random() * 500) + 50 // 50-550 builders
+  }
+
+  const getEarningAmount = () => {
+    return Math.floor(Math.random() * 5000) + 100 // 100-5100 $BUIDL/mo
   }
 
   return (
@@ -129,88 +155,90 @@ export default function Home() {
           )}
 
         {/* Clubs Grid */}
-          {!loading && !error && (
+        {!loading && !error && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {clubs.map((club) => (
-              <div key={club.id} className="bg-gray-800 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
-                {/* USDC Badge */}
-                <div className="absolute top-3 left-3 z-10">
-                  <span className="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded-full">
-                    USDC
-                  </span>
-                </div>
+            {clubs.map((club) => {
+              const onlineBuilders = getOnlineBuilders()
+              const builderCount = getBuilderCount(club)
+              const earningAmount = getEarningAmount()
+              const buildingStatus = getBuildingStatus(club)
+              
+              return (
+                <div key={club.id} className="bg-gray-800 rounded-xl overflow-hidden hover:shadow-lg transition-shadow relative">
+                  {/* Earning Badge */}
+                  <div className="absolute top-3 right-3 z-10">
+                    <span className="bg-orange-600 text-white text-xs font-medium px-2 py-1 rounded-full flex items-center space-x-1">
+                      <Flame className="h-3 w-3" />
+                      <span>{earningAmount.toLocaleString()} $BUIDL/mo</span>
+                    </span>
+                  </div>
 
-                {/* Club Thumbnail */}
-                <div className="relative h-48">
+                  {/* Club Thumbnail */}
+                  <div className="relative h-48">
                     {club.thumbnail_url ? (
                       <img
                         src={club.thumbnail_url}
                         alt={club.name}
-                      className="w-full h-full object-cover"
+                        className="w-full h-full object-cover"
                       />
                     ) : (
-                    <div className={`w-full h-full ${getClubThumbnail(club)} flex items-center justify-center`}>
-                      <span className="text-6xl">{getClubEmoji(club)}</span>
+                      <div className={`w-full h-full ${getClubThumbnail(club)} flex items-center justify-center`}>
+                        <span className="text-6xl">{getClubEmoji(club)}</span>
                       </div>
                     )}
-                </div>
-
-                {/* Club Content */}
-                <div className="p-4">
-                  <h3 className="text-white font-bold text-sm mb-3 line-clamp-2">
-                    {club.name}
-                  </h3>
-
-                  {/* Progress Bar */}
-                  <div className="mb-4">
-                    <div className="flex justify-between text-xs text-gray-400 mb-1">
-                      <span>Active</span>
-                      <span>Inactive</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div
-                        className="bg-gradient-to-r from-green-500 to-purple-500 h-2 rounded-full"
-                        style={{ width: `${club.progress || 75}%` }}
-                      ></div>
-                    </div>
-                    <div className="flex justify-between text-xs text-gray-400 mt-1">
-                      <span className="text-green-400">{club.progress || 75}%</span>
-                      <span className="text-purple-400">{100 - (club.progress || 75)}%</span>
-                    </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex space-x-2 mb-4">
-                    <button className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
-                      JOIN
-                    </button>
-                    <button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
-                      VIEW
-                    </button>
-                  </div>
+                  {/* Club Content */}
+                  <div className="p-4">
+                    {/* Club Name and Online Builders */}
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-white font-bold text-sm line-clamp-1 flex-1">
+                        {club.name}
+                      </h3>
+                      <div className="flex items-center space-x-1 text-xs text-green-400 ml-2">
+                        <Hammer className="h-3 w-3" />
+                        <span>{onlineBuilders} online</span>
+                      </div>
+                    </div>
 
-                  {/* Bottom Info */}
-                  <div className="flex items-center justify-between text-xs text-gray-400">
-                    <div className="flex items-center space-x-4">
+                    {/* Building Status */}
+                    <p className="text-gray-300 text-xs mb-4 line-clamp-1">
+                      {buildingStatus}
+                    </p>
+
+                    {/* Bottom Metrics */}
+                    <div className="flex items-center justify-between text-xs text-gray-400 mb-4">
                       <div className="flex items-center space-x-1">
-                        <div className="w-4 h-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
-                        <span>+{club.likes || Math.floor(Math.random() * 1000)}</span>
+                        <Users className="h-3 w-3" />
+                        <span>{builderCount} builders</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <DollarSign className="h-3 w-3" />
-                        <span>{formatVolume(club.market_cap || Math.floor(Math.random() * 100000))}</span>
+                        <span>Treasury: {formatVolume(club.market_cap || Math.floor(Math.random() * 100000))}</span>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <Clock className="h-3 w-3" />
-                      <span>Live</span>
+
+                    {/* Action Buttons */}
+                    <div className="flex space-x-2 mb-3">
+                      <button className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+                        JOIN & BUILD
+                      </button>
+                      <button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
+                        VIEW
+                      </button>
                     </div>
+
+                    {/* Live Indicator */}
+                    <div className="flex items-center justify-center space-x-1 text-xs text-green-400">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span>Live</span>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
+              )
+            })}
+          </div>
+        )}
 
           {/* Empty State */}
           {!loading && !error && clubs.length === 0 && (
