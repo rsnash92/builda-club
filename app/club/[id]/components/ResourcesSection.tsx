@@ -227,7 +227,7 @@ export function ResourcesSection({ club }: ResourcesSectionProps) {
                     <p className="text-gray-400 text-sm mb-4">{resource.description}</p>
                     
                     <div className="space-y-2 mb-4">
-                      {resource.seats && (
+                      {'seats' in resource && resource.seats && (
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-gray-400">Seats:</span>
                           <span className="text-white">
@@ -235,7 +235,7 @@ export function ResourcesSection({ club }: ResourcesSectionProps) {
                           </span>
                         </div>
                       )}
-                      {resource.usage && (
+                      {'usage' in resource && resource.usage && (
                         <div className="flex items-center justify-between text-sm">
                           <span className="text-gray-400">Usage:</span>
                           <span className="text-white">{resource.usage}</span>
@@ -248,25 +248,25 @@ export function ResourcesSection({ club }: ResourcesSectionProps) {
                     </div>
 
                     <div className="flex space-x-2">
-                      {resource.type === 'download' && (
+                      {'type' in resource && resource.type === 'download' && (
                         <button className="flex-1 bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded text-sm font-medium transition-colors">
                           <Download className="h-4 w-4 inline mr-1" />
                           Download
                         </button>
                       )}
-                      {resource.type === 'access' && (
+                      {'type' in resource && resource.type === 'access' && (
                         <button className="flex-1 bg-purple-500 hover:bg-purple-600 text-white px-3 py-2 rounded text-sm font-medium transition-colors">
                           <ExternalLink className="h-4 w-4 inline mr-1" />
                           Access
                         </button>
                       )}
-                      {resource.type === 'visit' && (
+                      {'type' in resource && resource.type === 'visit' && (
                         <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded text-sm font-medium transition-colors">
                           <ExternalLink className="h-4 w-4 inline mr-1" />
                           Visit
                         </button>
                       )}
-                      {!resource.type && (
+                      {(!('type' in resource) || !resource.type) && (
                         <button className="flex-1 bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded text-sm font-medium transition-colors">
                           <Settings className="h-4 w-4 inline mr-1" />
                           Manage
