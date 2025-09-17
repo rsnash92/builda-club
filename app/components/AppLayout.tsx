@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { 
@@ -14,7 +14,20 @@ import {
   ChevronRight,
   Sun,
   Moon,
-  Bell
+  Bell,
+  Menu,
+  X,
+  Home,
+  Trophy,
+  DollarSign,
+  Newspaper,
+  Zap,
+  Flame,
+  Gamepad2,
+  Brain,
+  Wrench,
+  MessageCircle,
+  PartyPopper
 } from 'lucide-react'
 
 interface AppLayoutProps {
@@ -23,56 +36,185 @@ interface AppLayoutProps {
 }
 
 const navigationItems = [
-  { id: 'dashboard', icon: LayoutDashboard, href: '/', label: 'Dashboard' },
-  { id: 'parachute', icon: Plane, href: '/parachute', label: 'Parachute' },
-  { id: 'play', icon: Play, href: '/play', label: 'Play' },
-  { id: 'box', icon: Box, href: '/box', label: 'Box' },
-  { id: 'search', icon: Search, href: '/search', label: 'Search' },
-  { id: 'calendar', icon: Calendar, href: '/calendar', label: 'Calendar' },
-  { id: 'users', icon: Users, href: '/users', label: 'Users' },
+  { id: 'home', icon: Home, href: '/', label: 'Home' },
+  { id: 'markets', icon: LayoutDashboard, href: '/', label: 'Markets' },
+  { id: 'leaderboard', icon: Trophy, href: '/leaderboard', label: 'Leaderboard' },
+  { id: 'earn', icon: DollarSign, href: '/earn', label: 'Earn' },
+  { id: 'news', icon: Newspaper, href: '/news', label: 'News' },
+]
+
+const categories = [
+  { 
+    id: 'crypto', 
+    name: 'Crypto', 
+    count: 24, 
+    icon: Zap,
+    color: 'from-pink-500 to-blue-500',
+    thumbnail: '₿'
+  },
+  { 
+    id: 'gaming', 
+    name: 'Gaming', 
+    count: 22, 
+    icon: Gamepad2,
+    color: 'from-green-500 to-purple-500',
+    thumbnail: '🎮'
+  },
+  { 
+    id: 'ai', 
+    name: 'AI', 
+    count: 6, 
+    icon: Brain,
+    color: 'from-blue-500 to-cyan-500',
+    thumbnail: '🤖'
+  },
+  { 
+    id: 'utility', 
+    name: 'Utility', 
+    count: 8, 
+    icon: Wrench,
+    color: 'from-orange-500 to-red-500',
+    thumbnail: '🔧'
+  },
+  { 
+    id: 'social', 
+    name: 'Social', 
+    count: 1, 
+    icon: MessageCircle,
+    color: 'from-purple-500 to-pink-500',
+    thumbnail: '💬'
+  },
+  { 
+    id: 'fun', 
+    name: 'Fun', 
+    count: 8, 
+    icon: PartyPopper,
+    color: 'from-yellow-500 to-orange-500',
+    thumbnail: '🎉'
+  },
 ]
 
 export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProps) {
   const pathname = usePathname()
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   return (
-    <div className="h-screen bg-[#16141A] flex">
-      {/* Left Sidebar */}
-      <div className="w-16 bg-black flex flex-col items-center py-4 space-y-4">
-        {/* Logo */}
-        <div className="flex items-center space-x-2 mb-6">
-          <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-sm">C</span>
-          </div>
-          <ChevronRight className="h-4 w-4 text-gray-400" />
+    <div className="h-screen bg-black flex">
+      {/* Collapsible Sidebar */}
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-gray-900 transition-all duration-300 ease-in-out flex flex-col`}>
+        {/* Header with Logo and Menu */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-700">
+          {!sidebarCollapsed && (
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+                <Zap className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-white font-bold text-lg">builda</span>
+            </div>
+          )}
+          <button
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="p-2 text-gray-400 hover:text-white transition-colors"
+          >
+            {sidebarCollapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
+          </button>
         </div>
 
         {/* Navigation Items */}
-        <div className="flex flex-col space-y-2">
-          {navigationItems.map((item) => {
-            const Icon = item.icon
-            const isActive = pathname === item.href || (item.id === 'dashboard' && pathname === '/')
-            
-            return (
-              <Link
-                key={item.id}
-                href={item.href}
-                className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                  isActive
-                    ? 'bg-gray-700 text-white'
-                    : 'text-gray-400 hover:bg-gray-700 hover:text-white'
-                }`}
-                title={item.label}
-              >
-                <Icon className="h-5 w-5" />
-              </Link>
-            )
-          })}
+        <div className="flex-1 py-4">
+          <div className="space-y-1 px-2">
+            {navigationItems.map((item) => {
+              const Icon = item.icon
+              const isActive = pathname === item.href || (item.id === 'home' && pathname === '/')
+              
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className={`flex items-center px-3 py-2 rounded-lg transition-colors group ${
+                    isActive
+                      ? 'bg-gray-800 text-white'
+                      : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                  }`}
+                >
+                  <Icon className="h-5 w-5 flex-shrink-0" />
+                  {!sidebarCollapsed && (
+                    <span className="ml-3 text-sm font-medium">{item.label}</span>
+                  )}
+                </Link>
+              )
+            })}
+          </div>
+
+          {/* Categories Section */}
+          {!sidebarCollapsed && (
+            <div className="mt-8 px-2">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">CATEGORIES</h3>
+              </div>
+              <div className="space-y-2">
+                {categories.map((category) => {
+                  const Icon = category.icon
+                  return (
+                    <div
+                      key={category.id}
+                      className="flex items-center p-2 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer group"
+                    >
+                      <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${category.color} flex items-center justify-center flex-shrink-0`}>
+                        <span className="text-white text-sm font-bold">{category.thumbnail}</span>
+                      </div>
+                      <div className="ml-3 flex-1 min-w-0">
+                        <div className="text-sm font-semibold text-white group-hover:text-white">
+                          {category.name}
+                        </div>
+                        <div className="text-xs text-gray-400">
+                          {category.count} Clubs
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Collapsed Categories - Show only icons */}
+          {sidebarCollapsed && (
+            <div className="mt-8 px-2">
+              <div className="space-y-2">
+                {categories.slice(0, 4).map((category) => {
+                  const Icon = category.icon
+                  return (
+                    <div
+                      key={category.id}
+                      className={`w-8 h-8 rounded-lg bg-gradient-to-r ${category.color} flex items-center justify-center mx-auto cursor-pointer hover:scale-110 transition-transform`}
+                      title={category.name}
+                    >
+                      <span className="text-white text-sm font-bold">{category.thumbnail}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
         </div>
+
+        {/* Bottom CTA Card */}
+        {!sidebarCollapsed && (
+          <div className="p-4">
+            <div className="bg-gray-800 rounded-xl p-4 text-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Zap className="h-6 w-6 text-white" />
+              </div>
+              <p className="text-white text-sm font-medium mb-1">Start building!</p>
+              <p className="text-gray-400 text-xs">Create your first club</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col bg-[#16141A]">
         {/* Top Header Bar */}
         <header className="bg-[#16141A] border-b border-gray-600 px-6 py-4">
           <div className="flex items-center justify-between">
