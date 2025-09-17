@@ -123,7 +123,7 @@ export default function ClubDashboard() {
   }
 
   return (
-    <div className="h-screen bg-slate-950 flex">
+    <div className="h-screen bg-[#16141A] flex">
       {/* Left Sidebar */}
       <div className="w-16 bg-black flex flex-col items-center py-4 space-y-4">
         {/* Logo */}
@@ -168,7 +168,7 @@ export default function ClubDashboard() {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
         {/* Top Header Bar */}
-        <header className="bg-black border-b border-gray-700 px-6 py-4">
+        <header className="bg-[#16141A] border-b border-gray-600 px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-bold text-white">{clubData.name}</h1>
@@ -193,7 +193,7 @@ export default function ClubDashboard() {
 
         {/* Main Content Area */}
         {activeTab === 'dashboard' ? (
-          <div className="flex-1 bg-slate-950 p-6">
+          <div className="flex-1 bg-[#16141A] p-6">
             {/* Search and Filters */}
             <div className="mb-8">
               <div className="flex flex-col lg:flex-row gap-6">
@@ -410,7 +410,7 @@ export default function ClubDashboard() {
             </div>
           </div>
         ) : activeTab === 'chat' ? (
-          <div className="flex-1 flex bg-slate-950">
+          <div className="flex-1 flex bg-[#16141A]">
             {/* Channels Sidebar */}
             <div className="w-64 bg-black flex flex-col">
               {/* Server Header */}
@@ -592,7 +592,7 @@ export default function ClubDashboard() {
             </div>
           </div>
         ) : (
-          <div className="flex-1 bg-slate-950 flex items-center justify-center">
+          <div className="flex-1 bg-[#16141A] flex items-center justify-center">
             <div className="text-center">
               <h2 className="text-2xl font-bold text-white mb-4">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</h2>
               <p className="text-gray-400">This section is coming soon!</p>
