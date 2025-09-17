@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { AppLayout } from '@/app/components/AppLayout'
 import { ClubService } from '@/lib/services/club-service'
 import { ClubWithMembers } from '@/lib/database/types'
 import { ClubHeader } from './components/ClubHeader'
@@ -39,40 +40,44 @@ export default function ClubPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white text-xl">Loading club...</div>
-      </div>
+      <AppLayout pageTitle="Loading...">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-white text-xl">Loading club...</div>
+        </div>
+      </AppLayout>
     )
   }
 
   if (!club) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white text-xl">Club not found</div>
-      </div>
+      <AppLayout pageTitle="Club Not Found">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-white text-xl">Club not found</div>
+        </div>
+      </AppLayout>
     )
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Navigation Header */}
-      <div className="border-b border-gray-800 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <button className="flex items-center text-gray-400 hover:text-white transition-colors">
-              <ChevronLeft className="h-5 w-5 mr-1" />
-              <span>Clubs</span>
+    <AppLayout pageTitle={club.name}>
+      <div className="px-6 py-8">
+        {/* Navigation Header */}
+        <div className="border-b border-gray-800 pb-4 mb-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <button className="flex items-center text-gray-400 hover:text-white transition-colors">
+                <ChevronLeft className="h-5 w-5 mr-1" />
+                <span>Clubs</span>
+              </button>
+            </div>
+            <button className="flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+              <Share2 className="h-4 w-4" />
+              <span>Share to Earn</span>
             </button>
           </div>
-          <button className="flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
-            <Share2 className="h-4 w-4" />
-            <span>Share to Earn</span>
-          </button>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="px-6 py-8">
+        {/* Main Content */}
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column - Main Content */}
@@ -103,6 +108,6 @@ export default function ClubPage() {
           </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   )
 }
