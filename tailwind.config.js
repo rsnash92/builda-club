@@ -35,9 +35,10 @@ module.exports = {
         pump: {
           green: '#10B981',
           'green-dark': '#059669',
-          'bg-primary': '#1F2937',
-          'bg-secondary': '#111827',
-          'bg-card': '#374151',
+          'bg-primary': '#15161a',
+          'bg-secondary': '#15161a',
+          'bg-card': '#202128',
+          'border': '#24252a',
           'text-primary': '#F9FAFB',
           'text-secondary': '#D1D5DB',
           'text-muted': '#9CA3AF',

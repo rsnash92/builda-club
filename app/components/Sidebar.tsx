@@ -27,7 +27,7 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <div className="w-16 bg-gray-800 flex flex-col items-center py-4 space-y-4">
+    <div className="w-16 bg-[#15161a] flex flex-col items-center py-4 space-y-4">
       {/* Logo */}
       <div className="flex items-center space-x-2 mb-6">
         <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
@@ -48,8 +48,8 @@ export function Sidebar() {
               href={item.href}
               className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
                 isActive
-                  ? 'bg-gray-700 text-white'
-                  : 'text-gray-400 hover:bg-gray-700 hover:text-white'
+                  ? 'bg-[#202128] text-white'
+                  : 'text-gray-400 hover:bg-[#202128] hover:text-white'
               }`}
               title={item.label}
             >

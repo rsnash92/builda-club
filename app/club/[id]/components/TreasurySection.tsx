@@ -79,11 +79,11 @@ export function TreasurySection({ club }: TreasurySectionProps) {
   ]
 
   return (
-    <div className="bg-gray-900/50 rounded-lg border border-gray-800">
+    <div className="bg-[#202128] rounded-lg border border-[#24252a]">
       {/* Header */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-800/50 transition-colors"
+        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[#202128]/50 transition-colors"
       >
         <div className="flex items-center space-x-3">
           <DollarSign className="h-5 w-5 text-green-400" />
@@ -106,7 +106,7 @@ export function TreasurySection({ club }: TreasurySectionProps) {
               {treasuryAllocation.map((item, index) => {
                 const Icon = item.icon
                 return (
-                  <div key={index} className="bg-gray-800/50 rounded-lg p-4">
+                  <div key={index} className="bg-[#202128]/50 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center space-x-2">
                         <Icon className="h-4 w-4 text-blue-400" />
@@ -118,7 +118,7 @@ export function TreasurySection({ club }: TreasurySectionProps) {
                       </div>
                     </div>
                     <p className="text-gray-400 text-sm mb-3">{item.description}</p>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="w-full bg-[#24252a] rounded-full h-2">
                       <div
                         className="bg-green-500 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${item.percentage}%` }}
@@ -135,7 +135,7 @@ export function TreasurySection({ club }: TreasurySectionProps) {
             <h4 className="text-white font-medium mb-4">Shared Resources</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {sharedResources.map((resource, index) => (
-                <div key={index} className="bg-gray-800/50 rounded-lg p-4">
+                <div key={index} className="bg-[#202128]/50 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-white font-medium">{resource.name}</span>
                     <span className="text-green-400 font-semibold">{resource.value}</span>

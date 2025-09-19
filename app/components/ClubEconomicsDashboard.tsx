@@ -79,11 +79,11 @@ const ClubEconomicsDashboard: React.FC<ClubEconomicsDashboardProps> = ({
 
   const getTierColor = (tier: string) => {
     switch (tier) {
-      case 'OBSERVER': return 'text-gray-600 bg-gray-100';
-      case 'BUILDER': return 'text-green-600 bg-green-100';
-      case 'PRO': return 'text-blue-600 bg-blue-100';
-      case 'ELITE': return 'text-purple-600 bg-purple-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'OBSERVER': return 'text-gray-400 bg-[#202128]';
+      case 'BUILDER': return 'text-green-400 bg-green-500/20';
+      case 'PRO': return 'text-blue-400 bg-blue-500/20';
+      case 'ELITE': return 'text-purple-400 bg-purple-500/20';
+      default: return 'text-gray-400 bg-[#202128]';
     }
   };
 
@@ -126,7 +126,7 @@ const ClubEconomicsDashboard: React.FC<ClubEconomicsDashboardProps> = ({
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex space-x-1 mb-8 bg-gray-100 p-1 rounded-lg">
+      <div className="flex space-x-1 mb-8 bg-[#202128] p-1 rounded-lg">
         {[
           { id: 'overview', label: 'Overview', icon: '📊' },
           { id: 'members', label: 'Members', icon: '👥' },
@@ -202,7 +202,7 @@ const ClubEconomicsDashboard: React.FC<ClubEconomicsDashboardProps> = ({
             <h3 className="text-xl font-semibold mb-4">📈 Revenue Trend</h3>
             <div className="space-y-3">
               {revenueHistory.map((period, index) => (
-                <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <div key={index} className="flex justify-between items-center p-3 bg-[#202128] rounded-lg">
                   <div>
                     <div className="font-medium">{period.month}</div>
                     <div className="text-sm text-gray-600">{period.members} members</div>
@@ -249,7 +249,7 @@ const ClubEconomicsDashboard: React.FC<ClubEconomicsDashboardProps> = ({
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead className="bg-[#202128]">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Member</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tier</th>
@@ -260,7 +260,7 @@ const ClubEconomicsDashboard: React.FC<ClubEconomicsDashboardProps> = ({
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {recentMembers.map((member, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
+                    <tr key={index} className="hover:bg-[#202128]/50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {member.address}
                       </td>

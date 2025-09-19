@@ -27,8 +27,8 @@ export function Header() {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
         isScrolled 
-          ? 'bg-slate-950/95 backdrop-blur-md shadow-lg py-2 border-b border-gray-800' 
-          : 'bg-slate-950 shadow-sm py-4 border-b border-gray-800'
+          ? 'bg-[#15161a]/95 backdrop-blur-md shadow-lg py-2 border-b border-[#24252a]' 
+          : 'bg-[#15161a] shadow-sm py-4 border-b border-[#24252a]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
