@@ -180,7 +180,7 @@ export default function Home() {
                       {/* Club Info */}
                       <div className="flex-1 min-w-0">
                         <h3 className="text-white font-bold text-lg mb-1 truncate">
-                          {club.name} ({club.symbol || 'CLUB'})
+                          {club.name} ({club.token_symbol || 'CLUB'})
                         </h3>
                         <p className="text-gray-400 text-sm line-clamp-2">
                           {club.description || buildingStatus}
