@@ -93,26 +93,10 @@ export default function Home() {
   return (
     <AppLayout pageTitle="Clubs">
       <div className="p-6">
-        {/* Top Search Bar */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-4">
-            <h1 className="text-2xl font-bold text-white">Crypto</h1>
-              <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <input
-                  type="text"
-                placeholder="Q Search clubs"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500"
-                />
-              </div>
-          </div>
-          <button className="flex items-center space-x-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors">
-            <UserPlus className="h-4 w-4" />
-            <span>Sign In</span>
-          </button>
-            </div>
+        {/* Page Title */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-white">Crypto</h1>
+        </div>
 
         {/* Filter Buttons */}
         <div className="flex items-center space-x-4 mb-6">

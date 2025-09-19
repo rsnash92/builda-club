@@ -99,28 +99,60 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   return (
-    <div className="h-screen bg-black flex">
-      {/* Collapsible Sidebar */}
-      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-black border-r border-gray-800 transition-all duration-300 ease-in-out flex flex-col`}>
-        {/* Header with Logo and Menu */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
-          {!sidebarCollapsed && (
-            <div className="flex items-center space-x-2">
+    <div className="h-screen bg-black flex flex-col">
+      {/* Main Header */}
+      <header className="bg-slate-950 border-b border-gray-800 px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Left side - Logo and Search */}
+          <div className="flex items-center space-x-6">
+            <Link href="/" className="flex items-center space-x-2 group">
               <img 
                 src="/images/logo/builda-logo.webp"
                 alt="builda.club"
-                className="w-8 h-8"
+                className="h-8 w-8"
               />
-              <span className="text-white font-bold text-lg">builda</span>
+              <span className="font-bold text-white text-xl">
+                builda.club
+              </span>
+            </Link>
+            
+            {/* Main Search Bar */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <input
+                type="text"
+                placeholder="Search clubs..."
+                className="w-80 pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              />
             </div>
-          )}
-          <button
-            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="p-2 text-gray-400 hover:text-white transition-colors"
-          >
-            {sidebarCollapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
-          </button>
+          </div>
+
+          {/* Right side - Sign In Button */}
+          <div className="flex items-center space-x-4">
+            <button className="flex items-center space-x-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors">
+              <span>Sign In</span>
+            </button>
+          </div>
         </div>
+      </header>
+
+      <div className="flex flex-1">
+        {/* Collapsible Sidebar */}
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-black border-r border-gray-800 transition-all duration-300 ease-in-out flex flex-col`}>
+          {/* Sidebar Header with Menu Toggle */}
+          <div className="flex items-center justify-between p-4 border-b border-gray-700">
+            {!sidebarCollapsed && (
+              <div className="flex items-center space-x-2">
+                <span className="text-white font-bold text-lg">Navigation</span>
+              </div>
+            )}
+            <button
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className="p-2 text-gray-400 hover:text-white transition-colors"
+            >
+              {sidebarCollapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
+            </button>
+          </div>
 
         {/* Navigation Items */}
         <div className="flex-1 py-4">
