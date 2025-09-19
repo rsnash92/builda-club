@@ -28,27 +28,27 @@
     --radius: 0.5rem;
   }
 
-  /* Dark theme inspired by CryptoCommunity.ai */
+  /* Dark theme inspired by pump.fun */
   .dark {
-    --background: 240 10% 3.9%; /* Very dark blue-gray #0A0A0F */
+    --background: 201 35% 15%; /* Dark teal-gray background */
     --foreground: 0 0% 98%; /* Pure white */
-    --card: 240 10% 6%; /* Dark card background #0F0F14 */
+    --card: 201 35% 12%; /* Darker card background */
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 6%;
+    --popover: 201 35% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 262 83% 58%; /* Vibrant purple #8B5CF6 */
+    --primary: 160 84% 39%; /* Pump.fun green #10B981 */
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 3.7% 15.9%; /* Dark gray #262626 */
+    --secondary: 201 25% 20%; /* Dark gray-teal */
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%; /* Muted text #A1A1AA */
-    --accent: 240 3.7% 15.9%;
+    --muted: 201 25% 20%;
+    --muted-foreground: 201 10% 65%; /* Muted text */
+    --accent: 201 25% 20%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%; /* Dark borders */
-    --input: 240 3.7% 15.9%;
-    --ring: 262 83% 58%;
+    --border: 201 25% 25%; /* Darker borders */
+    --input: 201 25% 20%;
+    --ring: 160 84% 39%;
   }
 }
 
@@ -57,7 +57,8 @@
     @apply border-gray-200 dark:border-gray-800;
   }
   body {
-    @apply bg-white text-gray-900 dark:bg-slate-950 dark:text-white;
+    @apply bg-white text-gray-900 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-800 dark:to-teal-900 dark:text-white;
+    min-height: 100vh;
   }
   html {
     @apply dark;
@@ -66,21 +67,29 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
-  
+
   .btn-primary {
-    @apply bg-violet-600 text-white hover:bg-violet-700 dark:bg-violet-600 dark:hover:bg-violet-700;
+    @apply bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700;
   }
-  
+
   .btn-secondary {
     @apply bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700;
   }
-  
+
   .card {
-    @apply rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-slate-900 dark:shadow-xl;
+    @apply rounded-lg border border-gray-200 bg-white shadow-sm dark:border-slate-700/50 dark:bg-slate-800/50 dark:shadow-xl dark:backdrop-blur-sm;
   }
-  
+
+  .pump-gradient {
+    @apply bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900;
+  }
+
+  .pump-card {
+    @apply bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-xl;
+  }
+
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;

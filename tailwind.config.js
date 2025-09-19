@@ -32,6 +32,16 @@ module.exports = {
           800: '#1e293b',
           900: '#0f172a',
         },
+        pump: {
+          green: '#10B981',
+          'green-dark': '#059669',
+          'bg-primary': '#1F2937',
+          'bg-secondary': '#111827',
+          'bg-card': '#374151',
+          'text-primary': '#F9FAFB',
+          'text-secondary': '#D1D5DB',
+          'text-muted': '#9CA3AF',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

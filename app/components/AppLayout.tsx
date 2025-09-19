@@ -93,19 +93,17 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   return (
-    <div className="h-screen bg-black flex">
+    <div className="h-screen pump-gradient flex">
       {/* Collapsible Sidebar - Full Height */}
-      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-black border-r border-gray-800 transition-all duration-300 ease-in-out flex flex-col`}>
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-slate-900/80 backdrop-blur-md border-r border-slate-700/50 transition-all duration-300 ease-in-out flex flex-col`}>
         {/* Sidebar Header with Logo and Menu Toggle */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-slate-700/50">
           {!sidebarCollapsed && (
-            <div className="flex items-center space-x-2">
-              <img 
-                src="/images/logo/builda-logo.webp"
-                alt="builda.club"
-                className="w-8 h-8"
-              />
-              <span className="text-white font-bold text-lg">builda</span>
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">⬧</span>
+              </div>
+              <span className="text-white font-bold text-lg">pump.fun</span>
             </div>
           )}
           <button
@@ -129,8 +127,8 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
                   href={item.href}
                   className={`flex items-center px-3 py-2 rounded-lg transition-colors group ${
                     isActive
-                      ? 'bg-gray-800 text-white'
-                      : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                      ? 'bg-slate-700/80 text-white'
+                      : 'text-gray-400 hover:bg-slate-700/50 hover:text-white'
                   }`}
                 >
                   <Icon className="h-5 w-5 flex-shrink-0" />
@@ -153,7 +151,7 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
                   <Link
                     key={category.id}
                     href={`/?category=${category.id}`}
-                    className="flex items-center px-3 py-2 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors group"
+                    className="flex items-center px-3 py-2 rounded-lg text-gray-400 hover:bg-slate-700/50 hover:text-white transition-colors group"
                   >
                     <div className={`w-6 h-6 rounded bg-gradient-to-r ${category.color} flex items-center justify-center text-white text-xs font-bold mr-3`}>
                       {category.thumbnail}
@@ -169,33 +167,48 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col bg-black">
-        {/* Main Header - Black Background */}
-        <header className="bg-black border-b border-gray-800 px-6 py-4">
+      <div className="flex-1 flex flex-col">
+        {/* Main Header - Matching pump.fun style */}
+        <header className="bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50 px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Left side - Search Bar */}
+            {/* Left side - Title and Search */}
             <div className="flex items-center space-x-6">
-              <div className="relative">
+              <div className="flex items-center space-x-4">
+                <h1 className="text-2xl font-bold text-white">
+                  Fun & real time <span className="text-gray-400">graph</span>
+                </h1>
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-400">with</span>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-4 h-4 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded"></div>
+                    <span className="text-white font-semibold">pump.fun</span>
+                  </div>
+                </div>
+              </div>
+              <div className="relative ml-8">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <input
                   type="text"
-                  placeholder="Search clubs..."
-                  className="w-80 pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  placeholder="Search for token"
+                  className="w-80 pl-10 pr-4 py-2 bg-slate-800/80 border border-slate-600/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
             </div>
 
-            {/* Right side - Sign In Button */}
-            <div className="flex items-center space-x-4">
-              <button className="flex items-center space-x-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors">
-                <span>Sign In</span>
+            {/* Right side - Action Buttons */}
+            <div className="flex items-center space-x-3">
+              <button className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-medium">
+                Create new coin
+              </button>
+              <button className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-medium">
+                Log in
               </button>
             </div>
           </div>
         </header>
 
         {/* Main Content */}
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 overflow-auto bg-slate-900/30 backdrop-blur-sm">
           {children}
         </div>
       </div>

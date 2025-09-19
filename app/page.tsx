@@ -93,35 +93,44 @@ export default function Home() {
   return (
     <AppLayout pageTitle="Clubs">
       <div className="p-6">
-        {/* Page Title */}
+        {/* Trending Section Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-white">Crypto</h1>
+          <div className="flex items-center space-x-2 mb-4">
+            <div className="w-5 h-5 text-red-500">
+              🔥
+            </div>
+            <h2 className="text-xl font-bold text-white">Now Trending</h2>
+          </div>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex items-center space-x-4 mb-6">
-          {filterOptions.map((option) => (
-                <button
-              key={option.id}
-              onClick={() => setActiveFilter(option.id)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeFilter === option.id
-                  ? 'bg-violet-600 text-white'
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-              }`}
-            >
-              {option.label}
-              {option.hasDropdown && (
-                <ChevronDown className="inline h-3 w-3 ml-1" />
-              )}
-                </button>
-              ))}
+        {/* Trending Controls */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-4">
+              <button className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-slate-700/50 hover:bg-slate-600/50 transition-colors">
+                <div className="w-3 h-3 bg-white rounded-full"></div>
+                <span className="text-white text-sm">Show animations</span>
+              </button>
+              <button className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-slate-700/50 hover:bg-slate-600/50 transition-colors">
+                <div className="w-3 h-3 bg-white rounded-full"></div>
+                <span className="text-white text-sm">Include nsfw</span>
+              </button>
+            </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <button className="p-2 text-gray-400 hover:text-white transition-colors">
+              <ChevronDown className="h-4 w-4 rotate-90" />
+            </button>
+            <button className="p-2 text-gray-400 hover:text-white transition-colors">
+              <ChevronDown className="h-4 w-4 -rotate-90" />
+            </button>
+          </div>
         </div>
 
           {/* Loading State */}
           {loading && (
             <div className="flex justify-center items-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
             </div>
           )}
 
@@ -131,91 +140,69 @@ export default function Home() {
             <p className="text-red-400 mb-4">Error loading clubs: {error}</p>
               <button
                 onClick={() => window.location.reload()}
-              className="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700"
+              className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
               >
                 Retry
               </button>
             </div>
           )}
 
-        {/* Clubs Grid */}
+        {/* Clubs Grid - Pump.fun style */}
         {!loading && !error && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {clubs.map((club) => {
               const onlineBuilders = getOnlineBuilders()
               const builderCount = getBuilderCount(club)
               const earningAmount = getEarningAmount()
               const buildingStatus = getBuildingStatus(club)
-              
+
               return (
-                <div key={club.id} className="bg-gray-800 rounded-xl overflow-hidden hover:shadow-lg transition-shadow relative">
-                  {/* Earning Badge */}
-                  <div className="absolute top-3 right-3 z-10">
-                    <span className="bg-orange-600 text-white text-xs font-medium px-2 py-1 rounded-full flex items-center space-x-1">
-                      <Flame className="h-3 w-3" />
-                      <span>{earningAmount.toLocaleString()} $BUIDL/mo</span>
-                    </span>
-                  </div>
-
-                  {/* Club Thumbnail */}
-                  <div className="relative h-48">
-                    {club.thumbnail_url ? (
-                      <img
-                        src={club.thumbnail_url}
-                        alt={club.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className={`w-full h-full ${getClubThumbnail(club)} flex items-center justify-center`}>
-                        <span className="text-6xl">{getClubEmoji(club)}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Club Content */}
+                <div key={club.id} className="pump-card hover:shadow-lg transition-all hover:scale-[1.02] duration-200 overflow-hidden">
+                  {/* Card Content */}
                   <div className="p-4">
-                    {/* Club Name and Online Builders */}
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-white font-bold text-sm line-clamp-1 flex-1">
-                        {club.name}
-                      </h3>
-                      <div className="flex items-center space-x-1 text-xs text-green-400 ml-2">
-                        <Hammer className="h-3 w-3" />
-                        <span>{onlineBuilders} online</span>
+                    {/* Header with Avatar and Info */}
+                    <div className="flex items-start space-x-3 mb-4">
+                      {/* Avatar */}
+                      <div className="relative">
+                        {club.thumbnail_url ? (
+                          <img
+                            src={club.thumbnail_url}
+                            alt={club.name}
+                            className="w-12 h-12 rounded-lg object-cover"
+                          />
+                        ) : (
+                          <div className={`w-12 h-12 ${getClubThumbnail(club)} rounded-lg flex items-center justify-center`}>
+                            <span className="text-2xl">{getClubEmoji(club)}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Club Info */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-white font-bold text-lg mb-1 truncate">
+                          {club.name} ({club.symbol || 'CLUB'})
+                        </h3>
+                        <p className="text-gray-400 text-sm line-clamp-2">
+                          {club.description || buildingStatus}
+                        </p>
                       </div>
                     </div>
 
-                    {/* Building Status */}
-                    <p className="text-gray-300 text-xs mb-4 line-clamp-1">
-                      {buildingStatus}
-                    </p>
-
-                    {/* Bottom Metrics */}
-                    <div className="flex items-center justify-between text-xs text-gray-400 mb-4">
-                      <div className="flex items-center space-x-1">
-                        <Users className="h-3 w-3" />
-                        <span>{builderCount} builders</span>
+                    {/* Stats Row */}
+                    <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
+                      <div>
+                        <span className="text-white font-medium">replies: {Math.floor(Math.random() * 1000)}</span>
                       </div>
-                      <div className="flex items-center space-x-1">
-                        <DollarSign className="h-3 w-3" />
-                        <span>Treasury: {formatVolume(club.market_cap || Math.floor(Math.random() * 100000))}</span>
+                      <div>
+                        <span className="text-emerald-400 font-medium">market cap: {formatVolume(club.market_cap || Math.floor(Math.random() * 100000))}</span>
                       </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex space-x-2 mb-3">
-                      <button className="flex-1 bg-green-600 hover:bg-green-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
-                        JOIN & BUILD
-                      </button>
-                      <button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors">
-                        VIEW
-                      </button>
-                    </div>
-
-                    {/* Live Indicator */}
-                    <div className="flex items-center justify-center space-x-1 text-xs text-green-400">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <span>Live</span>
+                    {/* Creator Info */}
+                    <div className="text-xs text-gray-500">
+                      <span>created by: </span>
+                      <span className="text-blue-400">builder{Math.floor(Math.random() * 1000)}</span>
+                      <span className="ml-2">({Math.floor(Math.random() * 24)}h ago)</span>
                     </div>
                   </div>
                 </div>
@@ -227,12 +214,12 @@ export default function Home() {
           {/* Empty State */}
           {!loading && !error && clubs.length === 0 && (
             <div className="text-center py-12">
-            <p className="text-gray-400 mb-4">No clubs found</p>
+            <p className="text-gray-400 mb-4">No trending tokens found</p>
               <Link
                 href="/create-club"
-              className="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700"
+              className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
               >
-                Create the first club
+                Create new coin
               </Link>
             </div>
           )}
