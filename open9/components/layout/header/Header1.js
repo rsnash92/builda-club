@@ -16,7 +16,7 @@ export default function Header1({ scroll, isMobileMenu, handleMobileMenu }) {
                                     <div id="site-logo">
                                         <div id="site-logo-inner">
                                             <Link href="/" rel="home" className="main-logo">
-                                                <img id="logo_header" src="/assets/images/logo/logo.png" data-retina="assets/images/logo/logo@2x.png" />
+                                                <img id="logo_header" src="/images/logo/builda-logo.webp" alt="builda.club" />
                                             </Link>
                                         </div>
                                     </div>{/* logo */}

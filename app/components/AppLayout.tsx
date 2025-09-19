@@ -106,9 +106,11 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           {!sidebarCollapsed && (
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                <Zap className="h-5 w-5 text-white" />
-              </div>
+              <img 
+                src="/images/logo/builda-logo.webp"
+                alt="builda.club"
+                className="w-8 h-8"
+              />
               <span className="text-white font-bold text-lg">builda</span>
             </div>
           )}

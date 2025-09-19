@@ -36,8 +36,10 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2 group">
-              <div 
-                className={`rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ease-in-out ${
+              <img 
+                src="/images/logo/builda-logo.webp"
+                alt="builda.club"
+                className={`transition-all duration-300 ease-in-out ${
                   isScrolled ? 'h-6 w-6' : 'h-8 w-8'
                 }`}
               />
