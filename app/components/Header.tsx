@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { AuthButton } from './AuthButton'
 import { useEffect, useState } from 'react'
 
@@ -36,12 +37,13 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2 group">
-              <img 
+              <Image 
                 src="/images/logo/builda-logo.webp"
                 alt="builda.club"
-                className={`transition-all duration-300 ease-in-out ${
-                  isScrolled ? 'h-6 w-6' : 'h-8 w-8'
-                }`}
+                width={isScrolled ? 24 : 32}
+                height={isScrolled ? 24 : 32}
+                className={`transition-all duration-300 ease-in-out`}
+                priority
               />
               <span 
                 className={`font-bold text-white transition-all duration-300 ease-in-out ${

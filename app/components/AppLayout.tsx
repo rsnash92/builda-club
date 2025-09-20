@@ -3,6 +3,7 @@
 import { ReactNode, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { 
   Play, 
   Box, 
@@ -53,10 +54,13 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
           <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'}`}>
             {!sidebarCollapsed && (
               <div className="flex items-center space-x-3">
-                <img 
+                <Image 
                   src="/images/logo/builda-logo.webp"
                   alt="builda.club"
+                  width={24}
+                  height={24}
                   className="w-6 rounded-full"
+                  priority
                 />
                 <span className="text-white font-bold text-sm">builda.club</span>
               </div>
@@ -71,10 +75,13 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
                 {showHamburger ? (
                   <Menu className="w-6 h-6 text-white" />
                 ) : (
-                  <img 
+                  <Image 
                     src="/images/logo/builda-logo.webp"
                     alt="builda.club"
+                    width={24}
+                    height={24}
                     className="w-6 h-6 rounded-full object-contain"
+                    priority
                   />
                 )}
               </button>
