@@ -38,7 +38,7 @@ export function Header() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2 group">
               <Image 
-                src="/images/logo/builda-logo.webp"
+                src="/builda-logo.webp"
                 alt="builda.club"
                 width={isScrolled ? 24 : 32}
                 height={isScrolled ? 24 : 32}

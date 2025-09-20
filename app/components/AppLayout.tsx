@@ -55,7 +55,7 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
             {!sidebarCollapsed && (
               <div className="flex items-center space-x-3">
                 <Image 
-                  src="/images/logo/builda-logo.webp"
+                  src="/builda-logo.webp"
                   alt="builda.club"
                   width={24}
                   height={24}
@@ -76,7 +76,7 @@ export function AppLayout({ children, pageTitle = "builda.club" }: AppLayoutProp
                   <Menu className="w-6 h-6 text-white" />
                 ) : (
                   <Image 
-                    src="/images/logo/builda-logo.webp"
+                    src="/builda-logo.webp"
                     alt="builda.club"
                     width={24}
                     height={24}
